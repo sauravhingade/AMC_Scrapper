@@ -1,0 +1,78 @@
+<!doctype html><html lang="en"><head><script>window.prerenderReady = false;</script><script>var dataLayer = window.dataLayer || [];
+            dataLayer.push({
+                event: "datalayer_loaded",
+                market_code: "Franklin Templeton India",
+                "role_selected ": 'investor',
+            });
+            (function (w, d, s, l, i) {
+                var ua = window.navigator.userAgent;
+                if (ua.indexOf('Datadog') === -1) {
+                    w[l] = w[l] || [];
+                    w[l].push({
+                        'gtm.start': new Date().getTime(),
+                        event: 'gtm.js'
+                    });
+                    var f = d.getElementsByTagName(s)[0],
+                        j = d.createElement(s),
+                        dl = l != 'dataLayer' ? '&l=' + l : '';
+                    j.async = true;
+                    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                    f.parentNode.insertBefore(j, f);
+                }
+            })(window, document, 'script', 'dataLayer', 'GTM-WD9N5M');</script><script>var _mtm = _mtm || [];
+            _mtm.push({
+                'mtm.startTime': (new Date().getTime()),
+                'event': 'mtm.Start'
+            });
+            var _paq = _paq || [];
+
+            var eventify = function (arr, callback) {
+                arr.push = function (e) {
+                    Array.prototype.push.call(arr, e);
+                    callback(arr);
+                };
+            };
+            eventify(dataLayer, function (updatedArr) {
+                var obj = dataLayer[dataLayer.length - 1];
+                //console.log("mtm OBJ: " + obj);
+                _mtm.push(obj);
+            });</script><meta charset="utf-8"><title></title><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/x-icon" href="assets/images/favicon.ico"><link rel="stylesheet" src="assets/css/normalize.css"/><link rel="stylesheet" src="assets/css/root.css"/><meta name="og:type" content="website"><meta name="X-UA-Compatible" content="IE=edge"><meta name="robots" content="max-image-preview:large"><script id="app-config">var appInitChannelConfig = {"channelId":"en-in-new","locale":"en-in","indexPage":"perSite","defaultSegment":"investor","gatewayUrl":"gateway","authentication":"ftindia"}</script><base href="/"><script defer="defer" src="runtime.6ee04a14c90e362b.js"></script><script defer="defer" src="vendor.b89ea1ea73c7f10d.js"></script><script defer="defer" src="main.f9c065d3f8b0ebc6.js"></script><script defer="defer" src="polyfills.79eb03c3f39b9c07.js"></script><script defer="defer" src="scripts.72039fd36c8dfade.js"></script><link href="styles.38de386035d6e639.css" rel="stylesheet"></head><body class=""><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WD9N5M" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script type="application/ld+json">{
+            "@context": "http://schema.org",
+            "@type": "Organization",
+            "url": "https://www.franklintempletonindia.com/",
+            "name": "Franklin Templeton Investments India",
+            "description": "Franklin Templeton offers a wide range of mutual funds and investment solutions. Plan for your future with global leader in investment management!",
+            "logo": "https://www.franklintempletonindia.com/assets/images/fti_logo.png",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Mumbai, India",
+                "postalCode": "400 013",
+                "streetAddress": "Indiabulls Finance Centre, Tower 2, Senapati Bapat Marg, Elphinstone (West)"
+            },
+            "contactPoint": [
+                {
+                    "@type": "ContactPoint",
+                    "telephone": "+1800 425 4255",
+                    "contactType": "customer service"
+                }
+            ],
+            "email": "grievanceredressal@franklintempleton.com",
+            "faxNumber": "022- 66391282",
+            "sameAs": [
+                "http://www.facebook.com/FranklinTempletonIndia",
+                "https://twitter.com/ftiindia",
+                "https://www.linkedin.com/company/2470432",
+                "http://www.youtube.com/templetonindia"
+            ]
+        }</script><app-root><style>#loader {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+      }
+
+      #loader img {
+        width: 100px;
+        height: 100px;
+      }</style><div id="loader"><img src="assets/images/home/loader.gif" alt="Loading..."></div></app-root></body></html>

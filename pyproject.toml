@@ -1,0 +1,10 @@
+[tool.ruff]
+
+line-length = 88
+
+[tool.ruff.lint]
+
+ignore = [
+    "BLE001",   # allow except Exception
+    "S110",     # allow bare pass in exception
+]

@@ -20,18 +20,67 @@ from .config import (
     DEBUG,
     DOWNLOAD_DIR,
     HEADERS,
-    HEADLESS,
     MONTH_ALIASES,
     MONTHS,
     PAGE_TIMEOUT_MS,
     amc_need_month_selection_tata,
     amc_need_month_selection_with_antnative,
     amc_need_month_selection_with_selectnative,
+    amc_need_slow_load,
     amc_need_year_selection,
+    get_headless,
     month_pattern,
     months,
 )
-from .utils import download_pdf_bytes, extract_date, safe_filename
+from .utils import download_pdf_bytes, extract_date, safe_filename, wait_for_dom_stable
+
+
+# Chromium's "new" headless mode ships a real PDF viewer (old headless
+# mode does not), which makes new-tab / download detection behave the
+# same way it does in headed mode. Reused by every launch() call below.
+#
+# Takes the ALREADY-RESOLVED headless bool (per-AMC, via get_headless())
+# rather than reading the global HEADLESS directly, so headful AMCs
+# (see config.AMC_NEED_HEADFUL) get correct launch args too.
+def _launch_args(headless: bool):
+    return ["--headless=new"] if headless else []
+
+
+def _capture_download_or_new_page(context, page, click_target, wait_ms=3000):
+    """
+    Clicks click_target and returns whichever fires first: a real
+    Download object, or a new Page (e.g. from target=_blank / window.open).
+
+    Returns (download, new_page) -- exactly one will be non-None, or
+    both None if neither fired within wait_ms.
+
+    Defined once outside any loop (rather than redefining on_download /
+    on_page inline per-iteration) so the listener closures don't capture
+    loop variables -- avoids Ruff B023 and the subtle bug it warns about.
+    """
+    result = {"download": None, "page": None}
+
+    def on_download(d):
+        if result["download"] is None:
+            result["download"] = d
+
+    def on_page(p):
+        if result["page"] is None:
+            result["page"] = p
+
+    context.on("download", on_download)
+    context.on("page", on_page)
+
+    try:
+        click_target.scroll_into_view_if_needed()
+        page.wait_for_timeout(300)
+        click_target.click(timeout=5000)
+        page.wait_for_timeout(wait_ms)
+    finally:
+        context.remove_listener("download", on_download)
+        context.remove_listener("page", on_page)
+
+    return result["download"], result["page"]
 
 
 def get_rendered_html(amc_name: str, page_url: str, interaction_steps=None) -> str:
@@ -42,9 +91,14 @@ def get_rendered_html(amc_name: str, page_url: str, interaction_steps=None) -> s
     "Factsheet" tab, since that's the most common pattern we've seen
     so far (e.g. 360 ONE).
     """
+    headless = get_headless(amc_name)
+
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=HEADLESS)
-        context = browser.new_context(user_agent=HEADERS["User-Agent"])
+        browser = p.chromium.launch(headless=headless, args=_launch_args(headless))
+        context = browser.new_context(
+            user_agent=HEADERS["User-Agent"],
+            accept_downloads=True,
+        )
         page = context.new_page()
         try:
             page.goto(page_url, timeout=PAGE_TIMEOUT_MS, wait_until="domcontentloaded")
@@ -52,6 +106,11 @@ def get_rendered_html(amc_name: str, page_url: str, interaction_steps=None) -> s
         except Exception as e:
             if DEBUG:
                 print(f"page.goto did not fully settle, proceeding anyway: {e}")
+        if amc_name.lower() in amc_need_slow_load:
+            wait_for_dom_stable(page, stable_checks=2, poll_ms=700, max_wait_ms=15000)
+        else:
+            page.wait_for_timeout(2500)
+
         dismiss_popups(page)
         if interaction_steps:
             if DEBUG:
@@ -261,7 +320,11 @@ def select_latest_available_year_taurus(page):
     return None
 
 
-def prepare_kotak_latest_factsheet(page_url: str, interaction_steps=None):
+def prepare_kotak_latest_factsheet(
+    page_url: str,
+    interaction_steps=None,
+    amc_name: str = "Kotak Mahindra Mutual Fund",
+):
     """
     Kotak Mutual Fund
 
@@ -292,9 +355,14 @@ def prepare_kotak_latest_factsheet(page_url: str, interaction_steps=None):
         "January",
     ]
 
+    headless = get_headless(amc_name)
+
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=HEADLESS)
-        context = browser.new_context(user_agent=HEADERS["User-Agent"])
+        browser = p.chromium.launch(headless=headless, args=_launch_args(headless))
+        context = browser.new_context(
+            user_agent=HEADERS["User-Agent"],
+            accept_downloads=True,
+        )
         page = context.new_page()
 
         try:
@@ -418,6 +486,7 @@ def prepare_kotak_latest_factsheet(page_url: str, interaction_steps=None):
 def get_sundaram_latest_pdf_links(
     page_url: str,
     interaction_steps=None,
+    amc_name: str = "Sundaram Mutual Fund",
 ):
     """
     Returns latest available Sundaram factsheet PDF URL(s).
@@ -430,10 +499,15 @@ def get_sundaram_latest_pdf_links(
 
     pdf_urls = []
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=HEADLESS)
+    headless = get_headless(amc_name)
 
-        context = browser.new_context(user_agent=HEADERS["User-Agent"])
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=headless, args=_launch_args(headless))
+
+        context = browser.new_context(
+            user_agent=HEADERS["User-Agent"],
+            accept_downloads=True,
+        )
 
         page = context.new_page()
 
@@ -512,34 +586,41 @@ def get_sundaram_latest_pdf_links(
                 except Exception:
                     pass
 
-                before = len(page.context.pages)
-
-                page.locator("#btn_download").click()
-
-                page.wait_for_timeout(3000)
-
-                after = len(page.context.pages)
-
-                print(f"Pages before : {before}")
-                print(f"Pages after  : {after}")
-
                 # --------------------------
-                # PDF opened
+                # Click download and catch either a new page (headed
+                # mode / new headless) or a "download" event (old
+                # headless mode, or sites that force Content-Disposition)
                 # --------------------------
 
-                if after > before:
-                    popup = page.context.pages[-1]
+                download, new_page = _capture_download_or_new_page(
+                    context, page, page.locator("#btn_download")
+                )
 
-                    popup.wait_for_load_state()
+                if download:
+                    url = download.url
+                    print("Download URL :", url)
 
-                    print("Popup URL :", popup.url)
-
-                    if popup.url.lower().endswith(".pdf"):
-                        pdf_urls.append(popup.url)
-
-                    popup.close()
+                    if url.lower().endswith(".pdf"):
+                        pdf_urls.append(url)
 
                     found = True
+
+                elif new_page:
+                    try:
+                        new_page.wait_for_load_state(timeout=5000)
+                    except Exception:
+                        pass
+
+                    print("Popup URL :", new_page.url)
+
+                    if new_page.url.lower().endswith(".pdf"):
+                        pdf_urls.append(new_page.url)
+
+                    new_page.close()
+
+                    found = True
+
+                if found:
                     break
 
                 # --------------------------
@@ -567,9 +648,17 @@ def get_sundaram_latest_pdf_links(
     return pdf_urls
 
 
-def fallback_get_latest_pdf_links_new(page_url: str, interaction_steps=None):
+def fallback_get_latest_pdf_links_new(
+    page_url: str,
+    interaction_steps=None,
+    amc_name: str | None = None,
+):
     """
     Fallback for sites where factsheets don't expose PDF hrefs.
+
+    This is the generic-fallback path (amc_with_genric_fallback in
+    config.py), which includes ICICI Prudential -- so amc_name should
+    be passed by the caller for the headful override to kick in there.
 
     Returns:
         (pdf_urls, link_contexts)
@@ -578,10 +667,15 @@ def fallback_get_latest_pdf_links_new(page_url: str, interaction_steps=None):
         link_contexts -> {pdf_url: surrounding text}
     """
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=HEADLESS)
+    headless = get_headless(amc_name)
 
-        context = browser.new_context(user_agent=HEADERS["User-Agent"])
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=headless, args=_launch_args(headless))
+
+        context = browser.new_context(
+            user_agent=HEADERS["User-Agent"],
+            accept_downloads=True,
+        )
 
         page = context.new_page()
 
@@ -802,37 +896,51 @@ def fallback_get_latest_pdf_links_new(page_url: str, interaction_steps=None):
                 except Exception:
                     pass
 
-                # ---------------- Popup ----------------
+                # ---------------- Popup / Download (headed + headless safe) ----------------
 
                 popup_opened = False
 
                 for attempt in range(2):
                     try:
-                        click_target.scroll_into_view_if_needed()
-                        page.wait_for_timeout(300)
+                        download, new_page = _capture_download_or_new_page(
+                            context, page, click_target
+                        )
 
-                        with context.expect_page(timeout=7000) as popup:
-                            click_target.click(timeout=5000)
+                        if download:
+                            url = download.url
+                            print("Download URL:", url)
 
-                        pdf_page = popup.value
-                        pdf_page.wait_for_load_state()
+                            if url.lower().endswith(".pdf"):
+                                urls.append(url)
+                                link_contexts[url] = context_text
 
-                        url = pdf_page.url
+                            popup_opened = True
 
-                        print("Popup URL:", url)
+                        elif new_page:
+                            try:
+                                new_page.wait_for_load_state(timeout=5000)
+                            except Exception:
+                                pass
 
-                        if url.lower().endswith(".pdf"):
-                            urls.append(url)
-                            link_contexts[url] = context_text
+                            url = new_page.url
+                            print("Popup URL:", url)
 
-                        pdf_page.close()
+                            if url.lower().endswith(".pdf"):
+                                urls.append(url)
+                                link_contexts[url] = context_text
 
-                        popup_opened = True
-                        break
+                            new_page.close()
+
+                            popup_opened = True
 
                     except Exception:
-                        if attempt == 0:
-                            page.wait_for_timeout(1000)
+                        pass
+
+                    if popup_opened:
+                        break
+
+                    if attempt == 0:
+                        page.wait_for_timeout(1000)
 
                 if popup_opened:
                     continue
@@ -880,8 +988,10 @@ def fallback_direct_download(page_url: str, amc_name: str, interaction_steps=Non
 
     os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 
+    headless = get_headless(amc_name)
+
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=HEADLESS)
+        browser = p.chromium.launch(headless=headless, args=_launch_args(headless))
 
         context = browser.new_context(
             user_agent=HEADERS["User-Agent"],
@@ -1005,8 +1115,10 @@ def fallback_direct_download_bandhan(
 
     saved_files = []
 
+    headless = get_headless(amc_name)
+
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=HEADLESS)
+        browser = p.chromium.launch(headless=headless, args=_launch_args(headless))
 
         context = browser.new_context(
             accept_downloads=True,
@@ -1060,6 +1172,7 @@ def fallback_direct_download_bandhan(
         content = download_pdf_bytes(
             download_url,
             referer_url=page_url,
+            amc_name=amc_name,
         )
 
         filename = safe_filename(f"{amc_name}_{month_text}")

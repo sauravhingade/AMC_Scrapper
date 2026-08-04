@@ -20,9 +20,9 @@ from .config import (
     DEBUG,
     DOWNLOAD_TIMEOUT_S,
     HEADERS,
-    HEADLESS,
     MONTH_NAMES_PATTERN,
     MONTHS,
+    get_headless,
 )
 
 
@@ -331,7 +331,10 @@ def pick_latest_links(pdf_links, link_contexts=None):
 
 
 def download_pdf_bytes(
-    pdf_url: str, referer_url: str, timeout=DOWNLOAD_TIMEOUT_S
+    pdf_url: str,
+    referer_url: str,
+    timeout=DOWNLOAD_TIMEOUT_S,
+    amc_name: str | None = None,
 ) -> bytes:
     """
     Some sites (e.g. Edelweiss) 403 direct/hotlinked file requests
@@ -343,6 +346,10 @@ def download_pdf_bytes(
     blocked. Existing sites that already worked with plain requests
     are completely unaffected; this only adds a fallback for the new
     403 case, it doesn't change anything about the working path.
+
+    amc_name is optional and only used to resolve the headless mode
+    for the Playwright fallback (e.g. Edelweiss needs a headed
+    browser here -- see config.AMC_NEED_HEADFUL).
     """
     headers_with_referer = {**HEADERS, "Referer": referer_url}
 
@@ -360,9 +367,17 @@ def download_pdf_bytes(
     except Exception as e:
         print(f"Plain download failed ({e}), retrying via real browser session...")
 
+    headless = get_headless(amc_name)
+
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=HEADLESS)
-        context = browser.new_context(user_agent=HEADERS["User-Agent"])
+        browser = p.chromium.launch(
+            headless=headless,
+            args=["--headless=new"] if headless else [],
+        )
+        context = browser.new_context(
+            user_agent=HEADERS["User-Agent"],
+            accept_downloads=True,
+        )
         page = context.new_page()
         try:
             page.goto(
@@ -372,19 +387,49 @@ def download_pdf_bytes(
         except Exception:
             pass
 
-        # Navigate the PAGE itself to the PDF, not context.request --
-        # a real navigation sends the same Sec-Fetch-* / Referer chain
-        # a genuine click would, which some WAFs specifically check
-        # and an API-style fetch (even from within a browser context)
-        # does not replicate.
+        # Some sites (especially in old headless mode, which has no
+        # built-in PDF viewer) treat a direct navigation to a PDF as a
+        # download rather than a page load -- page.goto then raises
+        # net::ERR_ABORTED even though the file transferred fine. Catch
+        # that via the "download" event as a fallback to the normal
+        # response-body path.
+        downloaded = []
+
+        def on_download(d):
+            downloaded.append(d)
+
+        context.on("download", on_download)
+
+        status = None
+        content = None
+
         try:
+            # Navigate the PAGE itself to the PDF, not context.request --
+            # a real navigation sends the same Sec-Fetch-* / Referer chain
+            # a genuine click would, which some WAFs specifically check
+            # and an API-style fetch (even from within a browser context)
+            # does not replicate.
             response = page.goto(pdf_url, timeout=PAGE_TIMEOUT_MS)
             status = response.status if response else None
             content = response.body() if response and status == 200 else None
         except Exception as e:
-            status = None
-            content = None
             print(f"Direct navigation to PDF also failed: {e}")
+
+        context.remove_listener("download", on_download)
+
+        if content is None and downloaded:
+            # goto aborted because a download started instead of a
+            # normal navigation -- pull the bytes from the download.
+            try:
+                download = downloaded[0]
+                tmp_path = download.path()
+
+                if tmp_path:
+                    with open(tmp_path, "rb") as f:
+                        content = f.read()
+                    status = 200
+            except Exception as e:
+                print(f"Reading downloaded PDF bytes failed: {e}")
 
         browser.close()
 
@@ -394,3 +439,44 @@ def download_pdf_bytes(
         )
 
     return content
+
+
+def wait_for_dom_stable(page, stable_checks=2, poll_ms=700, max_wait_ms=15000):
+    """
+    Polls page.content() until it stops changing across `stable_checks`
+    consecutive polls, or max_wait_ms is exceeded.
+
+    Deliberately does NOT look for PDF links specifically -- some
+    pages (e.g. Edelweiss, SBI) already have unrelated PDFs (SOPs,
+    circulars) in the DOM before the factsheet section finishes its
+    async load, so "wait for any a[href$='.pdf']" fires too early and
+    returns a false positive. Waiting for the DOM to genuinely stop
+    changing is a safer, content-agnostic signal that async
+    rendering has finished.
+    """
+    last_html = None
+    stable_count = 0
+    elapsed = 0
+
+    while elapsed < max_wait_ms:
+        try:
+            current_html = page.content()
+        except Exception:
+            current_html = None
+
+        if current_html is not None and current_html == last_html:
+            stable_count += 1
+            if stable_count >= stable_checks:
+                if DEBUG:
+                    print(f"DOM stabilized after ~{elapsed}ms")
+                return True
+        else:
+            stable_count = 0
+
+        last_html = current_html
+        page.wait_for_timeout(poll_ms)
+        elapsed += poll_ms
+
+    if DEBUG:
+        print(f"DOM did not stabilize within {max_wait_ms}ms, proceeding anyway")
+    return False

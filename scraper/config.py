@@ -33,6 +33,40 @@ amc_need_month_selection_tata = {"tata mutual fund"}
 amc_need_year_selection = {
     "taurus mutual fund",
 }
+amc_need_slow_load = {"sbi mutual fund"}
+
+# -----------------------------------------------------------------------
+# AMCs that need a real (headed) browser window instead of headless.
+#
+# Some sites' WAF / anti-bot checks (Cloudflare, etc.) behave
+# differently -- or outright block -- headless Chromium, even with
+# "--headless=new". Rather than flipping the global HEADLESS flag for
+# everyone, these AMCs are special-cased to always run headed while
+# every other AMC keeps using the global default below.
+# -----------------------------------------------------------------------
+
+AMC_NEED_HEADFUL = {
+    "edelweiss mutual fund",
+    "hdfc mutual fund",
+    "icici prudential mutual fund",
+    "unifi mutual fund",
+    # "sbi mutual fund",
+}
+
+
+def get_headless(amc_name: str | None) -> bool:
+    """
+    Resolve the effective headless mode for a given AMC.
+
+    Returns False (i.e. run headed) for any AMC in AMC_NEED_HEADFUL,
+    regardless of the global HEADLESS setting. Falls back to the
+    global HEADLESS for every other AMC, or when amc_name is None
+    (e.g. call sites that haven't been updated to pass it yet).
+    """
+    if amc_name and amc_name.strip().lower() in AMC_NEED_HEADFUL:
+        return False
+    return HEADLESS
+
 
 # -----------------------------------------------------------------------
 # HTTP / browser settings
@@ -48,7 +82,7 @@ HEADERS = {
 
 HEADLESS = True
 DOWNLOAD_DIR = "downloads"
-PAGE_TIMEOUT_MS = 30000
+PAGE_TIMEOUT_MS = 100000
 DOWNLOAD_TIMEOUT_S = 20
 DEBUG = True  # set False to silence link-scoring / trace logs
 

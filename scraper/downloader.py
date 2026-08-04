@@ -71,7 +71,7 @@ def download_factsheet(amc_name: str, page_url: str, interaction_steps=None):
             print(f"Using prepare factsheet by date selection{amc_name}")
         # cannot automate kotak as its protected by radware bot detection
         pdf_links, link_contexts = prepare_kotak_latest_factsheet(
-            page_url, interaction_steps
+            page_url, interaction_steps, amc_name=amc_name
         )
         latest_links = pick_latest_links(pdf_links, link_contexts)
 
@@ -82,6 +82,7 @@ def download_factsheet(amc_name: str, page_url: str, interaction_steps=None):
         pdf_links, link_contexts = fallback_get_latest_pdf_links_new(
             page_url,
             interaction_steps,
+            amc_name=amc_name,
         )
 
         latest_links = pick_latest_links(
@@ -93,7 +94,9 @@ def download_factsheet(amc_name: str, page_url: str, interaction_steps=None):
         if DEBUG:
             print(f"Using date selection for {amc_name}")
             # cannot automate kotak as its protected by radware bot detection
-        pdf_links = get_sundaram_latest_pdf_links(page_url, interaction_steps)
+        pdf_links = get_sundaram_latest_pdf_links(
+            page_url, interaction_steps, amc_name=amc_name
+        )
         latest_links = pick_latest_links(pdf_links)
 
     else:
@@ -126,7 +129,9 @@ def download_factsheet(amc_name: str, page_url: str, interaction_steps=None):
 
     for pdf_url in latest_links:
         try:
-            content = download_pdf_bytes(pdf_url, referer_url=page_url)
+            content = download_pdf_bytes(
+                pdf_url, referer_url=page_url, amc_name=amc_name
+            )
         except Exception as e:
             print(f"Failed to download {pdf_url}: {e}")
             continue

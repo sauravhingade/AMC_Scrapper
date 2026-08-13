@@ -56,25 +56,85 @@ instead of silently producing wrong data.
 """
 
 import re
-from ..pdf_reader import get_column_text
 
 SIDEBAR_WIDTH = 180
 
 _MONTHS = {
-    "january", "february", "march", "april", "may", "june", "july",
-    "august", "september", "october", "november", "december",
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december",
 }
 # "ex" excluded because HDFC prefixes an outgoing/departed manager's name
 # with "Ex" (e.g. "¥ Ex Chirag Setalvad") -- found on schemes that recently
 # changed fund managers. "¥" is a footnote marker, also noise.
-_NOISE_WORDS = {"over", "since", "total", "exp", "name", "year", "years", "ex"} | _MONTHS
+_NOISE_WORDS = {
+    "over",
+    "since",
+    "total",
+    "exp",
+    "name",
+    "year",
+    "years",
+    "ex",
+} | _MONTHS
+
+
+def reconstruct_lines(words, y_tolerance: float = 1.5) -> str:
+    """Group words into lines by y-position, sort each line left-to-right.
+
+    y_tolerance was originally 3.0, which merges lines whose baselines sit
+    within 3pt of each other. Found via testing: a name that wraps to a new
+    line (e.g. "Mehta") can land within 3pt of a small sleeve-role tag
+    ("Equity"/"Debt") positioned elsewhere on the page, causing the two to
+    merge into one reconstructed line with WRONG x-order -- the tag (further
+    left) sorts before the wrapped name, corrupting extraction. 1.5pt keeps
+    genuinely-same-line words together while separating near-miss cases like
+    this one.
+    """
+    lines = {}
+    for w in words:
+        y = round(w["top"] / y_tolerance) * y_tolerance
+        lines.setdefault(y, []).append(w)
+    return "\n".join(
+        " ".join(w["text"] for w in sorted(lines[y], key=lambda w: w["x0"]))
+        for y in sorted(lines)
+    )
+
+
+def get_column_text(page, x0: float, x1: float) -> str:
+    """Extract clean text from a vertical column slice of a page, by
+    physically cropping the page to the bbox first.
+
+    GOTCHA (found via testing against an HDFC factsheet, doesn't show up on
+    360 ONE's layout): page.within_bbox() clips glyphs AT the boundary --
+    if a word straddles x1 (e.g. "(TRI)" starting inside the column but
+    ending just past it), the clip cuts the word mid-character ("(TRI)"
+    becomes "(TRI"), silently corrupting the value. This function is kept
+    as-is (360 ONE's sidebar has a clean gap at its boundary, so it never
+    hits this), but any AMC whose columns wrap text right up against the
+    crop line should use get_column_text_by_start() instead.
+    """
+    cropped = page.within_bbox((x0, 0, x1, page.height))
+    words = cropped.extract_words()
+    return reconstruct_lines(words)
 
 
 def _is_noise_token(tok: str) -> bool:
     t = tok.strip(",.\u00a5").lower()
     if t in _NOISE_WORDS or t == "":
         return True
-    if re.match(r"^\d+[.,]?\d*[,]?$", tok):  # bare numbers, "29,", "2026" etc
+    if re.match(  # noqa: SIM103
+        r"^\d+[.,]?\d*[,]?$", tok
+    ):  # bare numbers, "29,", "2026" etc
         return True
     return False
 
@@ -113,7 +173,13 @@ def extract_fund_managers(sidebar_text: str) -> list[dict]:
         if sleeve_m:
             name = " ".join(buffer).strip()
             if name:
-                managers.append({"role": "Fund Manager", "name": name, "sleeve": sleeve_m.group(1).strip()})
+                managers.append(
+                    {
+                        "role": "Fund Manager",
+                        "name": name,
+                        "sleeve": sleeve_m.group(1).strip(),
+                    }
+                )
             buffer = []
             continue
         buffer.extend(t for t in line.split() if not _is_noise_token(t))
@@ -140,8 +206,12 @@ def _trim_garbage(value: str) -> str:
 
 
 _STOP = r"(?=\n#|\nEXIT LOAD|\nDATE OF ALLOTMENT|\nNAV\b|\nFor \b|$)"
-_BENCH_PRIMARY_RE = re.compile(r"#BENCHMARK(?:\s+INDEX)?\s*\n\s*(.+?)" + _STOP, re.DOTALL)
-_BENCH_ADDL_RE = re.compile(r"##\s*ADDL\.?\s*BENCHMARK(?:\s+INDEX)?\s*\n\s*(.+?)" + _STOP, re.DOTALL)
+_BENCH_PRIMARY_RE = re.compile(
+    r"#BENCHMARK(?:\s+INDEX)?\s*\n\s*(.+?)" + _STOP, re.DOTALL
+)
+_BENCH_ADDL_RE = re.compile(
+    r"##\s*ADDL\.?\s*BENCHMARK(?:\s+INDEX)?\s*\n\s*(.+?)" + _STOP, re.DOTALL
+)
 
 
 def _clean_bench(raw: str | None) -> str | None:

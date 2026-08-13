@@ -64,7 +64,9 @@ def get_column_text_by_start(page, x0: float, x1: float, x_tolerance: float = 3)
     actually starts) since it can only ever pull in whole words, never
     partial ones.
     """
-    words = [w for w in page.extract_words(x_tolerance=x_tolerance) if x0 <= w["x0"] < x1]
+    words = [
+        w for w in page.extract_words(x_tolerance=x_tolerance) if x0 <= w["x0"] < x1
+    ]
     return reconstruct_lines(words)
 
 

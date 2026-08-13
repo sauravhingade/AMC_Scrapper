@@ -1,2307 +1,705 @@
 [
   {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Flexi Cap Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY 500 Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Amit Ganatra",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Multi Cap Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY500 Multicap 50:25:25 (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Amar Kalkundrikar",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Large Cap Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY 100 Total Returns Index (TRI)",
-    "additional_benchmark": "BSE SENSEX Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Rahul Baijal",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Mid Cap Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY MIDCAP 150 (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Chirag Setalvad",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Small Cap Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "BSE 250 Smallcap Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Chirag Setalvad",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Large And Mid Cap Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY LARGE - MIDCAP 250 Index (TRI)",
-    "additional_benchmark": "BSE SENSEX Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Gopal Agrawal",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Value Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY 500 Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anand Laddha",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Dividend Yield Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY 500 Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Gopal Agrawal",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Focused Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY 500 Index (TRI)",
-    "additional_benchmark": "BSE SENSEX Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Amit Ganatra",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Business Cycle Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY 500 Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Rahul Baijal",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Transportation And Logistics Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY Transportation & Logistics Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Priya Ranjan",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Defence Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY India Defence Index TRI (Total Returns Index)",
-    "additional_benchmark": "Nifty 50 Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Rahul Baijal Priya Ranjan",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Banking & Financial Services Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY Financial Services (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anand Laddha",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Technology Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "BSE Teck Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Balakumar B",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Pharma And Healthcare Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "BSE Healthcare Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Nikhil Mathur",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Housing Opportunities Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "Nifty Housing Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Srinivasan Ramamurthy",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Infrastructure Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "BSE India Infrastructure Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Ashish Shah",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Mnc Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY MNC (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Nikhil Mathur",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Consumption Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY India Consumption Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Amit Sinha",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Manufacturing Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY India Manufacturing Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Rakesh Sethia",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Innovation Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY 500 Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Amit Sinha",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Balanced Advantage Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY 50 Hybrid Composite Debt 50:50 Index (Total Returns Index)",
-    "additional_benchmark": "Nifty 50 Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Gopal Agrawal",
-        "sleeve": "Equity Portfolio"
-      },
-      {
-        "role": "Fund Manager",
-        "name": "Anil Bamboli",
-        "sleeve": "Debt Portfolio"
-      },
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal",
-        "sleeve": "Arbitrage Assets"
-      },
-      {
-        "role": "Fund Manager",
-        "name": "Srinivasan Ramamurthy",
-        "sleeve": "Equity Portfolio"
-      },
-      {
-        "role": "Fund Manager",
-        "name": "Nandita Menezes",
-        "sleeve": "Arbitrage Assets"
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Hybrid Equity Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY 50 Hybrid Composite Debt 65:35 Index (Total Returns Index)",
-    "additional_benchmark": "Nifty 50 Index (TRI)",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anupam Joshi",
-        "sleeve": "Debt Portfolio"
-      },
-      {
-        "role": "Fund Manager",
-        "name": "Srinivasan Ramamurthy",
-        "sleeve": "Equity Portfolio"
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Multi-Asset Allocation Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "65% Nifty 50 TRI + 22.5% Nifty Composite Debt Index +10% Domestic Price of Gold + 2.5% Domestic Price of Silver",
-    "additional_benchmark": "Nifty 50 Index (TRI) NET EQUITY EXPOSURE 60.34%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anil Bamboli",
-        "sleeve": "Debt Portfolio"
-      },
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal",
-        "sleeve": "Arbitrage Assets"
-      },
-      {
-        "role": "Fund Manager",
-        "name": "Srinivasan Ramamurthy (Equity Portfolio ) Bhagyesh Kagalkar (Dedicated Fund Manager for commodities related investments viz. Gold) Nandita Menezes",
-        "sleeve": "Arbitrage Assets"
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Equity Savings Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY Equity Savings Index (Total Returns Index)",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index NET EQUITY EXPOSURE 37.90%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anil Bamboli",
-        "sleeve": "Debt Portfolio"
-      },
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal",
-        "sleeve": "Arbitrage Assets"
-      },
-      {
-        "role": "Fund Manager",
-        "name": "Srinivasan Ramamurthy",
-        "sleeve": "Equity Portfolio"
-      },
-      {
-        "role": "Fund Manager",
-        "name": "Nandita Menezes",
-        "sleeve": "Arbitrage Assets"
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Hybrid Debt Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY 50 Hybrid Composite Debt 15:85 Inde (Total Returns Index)",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anupam Joshi",
-        "sleeve": "Debt Assets"
-      },
-      {
-        "role": "Fund Manager",
-        "name": "Srinivasan Ramamurthy (Equity Assets )",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Gold Etf Fund Of Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "Domestic Price of Physical Gold",
-    "additional_benchmark": null,
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Silver Etf Fund Of Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "Domestic Prices of physical Silver (derived as per regulatory norms)",
-    "additional_benchmark": null,
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Children'S Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY 50 Hybrid Composite Debt 65:35 Inde (Total Returns Index)",
-    "additional_benchmark": "Nifty 50 Index (TRI) LOCK-IN PERIOD",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Chirag Setalvad",
-        "sleeve": "Equity Portfolio"
-      },
-      {
-        "role": "Fund Manager",
-        "name": "Anil Bamboli",
-        "sleeve": "Debt Portfolio"
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Retirement Savings Fund - Equity Plan",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY 500 (Total Returns Index)",
-    "additional_benchmark": "Nifty 50 Index (TRI) LOCK-IN PERIOD Existing investments by investors including SIP / STP registrations, etc (until June 1, 2018): Units purchased cannot be assigned / transferred / pledged / redeemed / switched out until completion of 5 years from the date o allotment of Units under the Scheme. (Note: Ex Load may apply. Please refer Page 104 to 113 for details. Fresh investments by investors including SI / STP registrations, etc (effective June 2, 2018): Units purchased cannot be assigned / transferred / pledged / redeemed / switched out until completion of 5 years from the date o allotment of Units or Retirement Age of Unit holder (i.e. completion of 60 years), whichever is earlier. (Note: No",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anupam Joshi",
-        "sleeve": "Debt Assets"
-      },
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal",
-        "sleeve": "Arbitrage Assets"
-      },
-      {
-        "role": "Fund Manager",
-        "name": "Srinivasan Ramamurthy (Equity Assets ) Nandita Menezes",
-        "sleeve": "Arbitrage Assets"
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Retirement Savings Fund - Hybrid Equity Plan",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY 50 Hybrid Composite Debt 65:35 Inde (Total Returns Index)",
-    "additional_benchmark": "Nifty 50 Index (TRI) LOCK-IN PERIOD Existing investments by investors including SIP / STP registrations, etc (until June 1, 2018): Units purchased cannot be assigned / transferred / pledged / redeemed / switched out until completion of 5 years from the date o allotment of Units under the Scheme. (Note: Ex Load may apply. Please refer Page 104 to 113 for details. Fresh investments by investors including SIP / STP registrations, etc (effective June 2, 2018): Units purchased cannot be assigned / transferred / pledged / redeemed / switched out until completion of 5 years from the date o allotment of Units or Retirement Age of Unit holder (i.e. completion of 60 years), whichever is earlier. (Note: No",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anupam Joshi",
-        "sleeve": "Debt Assets"
-      },
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal (Arbitrage Assets) Srinivasan Ramamurthy (Equity Assets ) Nandita Menezes (Arbitrage Assets)",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Retirement Savings Fund - Hybrid Debt Plan",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY 50 Hybrid Composite Debt 15:85 Index (Total Returns Index)",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index LOCK-IN PERIOD Existing investments by investors including SIP / STP registrations, etc (until June 1, 2018): Units purchased cannot be assigned / transferred / pledged / redeemed / switched out until completion of 5 years from the date o allotment of Units under the Scheme. (Note:",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anupam Joshi",
-        "sleeve": "Debt Assets"
-      },
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal",
-        "sleeve": "Arbitrage Assets"
-      },
-      {
-        "role": "Fund Manager",
-        "name": "Srinivasan Ramamurthy (Equity Assets ) Nandita Menezes",
-        "sleeve": "Arbitrage Assets"
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Overnight Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "CRISIL Liquid Overnight Index",
-    "additional_benchmark": "CRISIL 1 Year T-Bill Index",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Swapnil Jangam Rohan Pillai",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Liquid Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "CRISIL Liquid Debt A-I Index",
-    "additional_benchmark": "CRISIL 1 Year T-Bill Index",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Swapnil Jangam Rohan Pillai",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Ultra Short Term Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "CRISIL Ultra Short Duration Debt A-I Index",
-    "additional_benchmark": "CRISIL 1 Year T-Bill Index",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anil Bamboli Praveen Jain",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Low Duration Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY Low Duration Debt Index A-I",
-    "additional_benchmark": "CRISIL 1 Year T-Bill Index",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anupam Joshi Praveen Jain",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Money Market Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "CRISIL Money Market A-I Index",
-    "additional_benchmark": "CRISIL 1 Year T-Bill Index",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Praveen Jain",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Short Term Debt Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "CRISIL Short Duration Debt A-II Index",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anil Bamboli",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Medium Term Debt Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY Medium Duration Debt Index A-III",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anil Bamboli Praveen Jain Bhavyesh Divecha",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Income Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "CRISIL Medium To Long Duration Debt A-III Index",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anupam Joshi",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Long Duration Debt Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY Long Duration Debt Index - A-III",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anupam Joshi",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Arbitrage Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY 50 Arbitrage Index (Total Returns Index",
-    "additional_benchmark": "CRISIL 1 Year T-Bill Index",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anil Bamboli",
-        "sleeve": "Debt Assets"
-      },
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal",
-        "sleeve": "Arbitrage Assets"
-      },
-      {
-        "role": "Fund Manager",
-        "name": "Nandita Menezes",
-        "sleeve": "Arbitrage Assets"
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Floating Rate Debt Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "CRISIL Short Duration Debt A-II Index",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anil Bamboli",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Corporate Bond Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY Corporate Bond Index A- II",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anupam Joshi",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Banking And Psu Debt Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY Banking & PSU Debt Index A-II",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anil Bamboli",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Credit Risk Debt Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY Credit Risk Bond Index B-II",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Praveen Jain Bhavyesh Divecha",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Dynamic Debt Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY Composite Debt Index A- III",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anil Bamboli",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Gilt Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY All Duration G-Sec Index",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anil Bamboli",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Fund Details Annexure",
-    "factsheet_month": "Unknown",
-    "benchmark": null,
-    "additional_benchmark": null,
-    "isin": "",
-    "fund_managers": [],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "benchmark_not_found",
-      "fund_manager_not_found",
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Factsheet - June 2026",
-    "scheme_name": "Hdfc Gilt Fund Nav As At June 30, 2026 \u20b960.8378 Praveen Jain",
-    "factsheet_month": "Unknown",
-    "benchmark": null,
-    "additional_benchmark": null,
-    "isin": "",
-    "fund_managers": [],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "benchmark_not_found",
-      "fund_manager_not_found",
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty 50 Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "Nifty 50 Index (TRI)",
-    "additional_benchmark": "BSE SENSEX Index (TRI) TRACKING ERROR Annualised tracking error is calculated based on daily rolling returns for the last 12 months: Regular: 0.02% Direct: 0.02%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes yea",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty 100 Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY 100 Total Returns Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: Regular: 0.04% Direct: 0.05%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Bse Sensex Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "BSE SENSEX Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based on daily rolling returns for the last 12 months: Regular: 0.03% Direct: 0.04%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes yea",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Bse 500 Index Fund",
+    "amc_name": "Abakkus Mutual Fund Abakkus Mutual Fund Factsheet",
+    "scheme_name": "Abakkus Flexi Cap Fund",
     "factsheet_month": "Unknown",
     "benchmark": "BSE 500 Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: Regular: 0.06% Direct: 0.06%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Bse India Sector Leaders Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "BSE India Sector Leaders Index (TRI)",
-    "additional_benchmark": "NIFTY 50 (TRI) TRACKING ERROR Annualised Standard Deviation (tracking erro has been calculated based on the available dat i.e. since inception: Regular: 0.04% Direct: 0.04%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty Next 50 Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY Next 50 Total Returns Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based on daily rolling returns for the last 12 months: Regular: 0.05% Direct: 0.06%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes yea",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty Midcap 150 Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY Midcap 150 Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: Regular: 0.06% Direct: 0.07%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty Smallcap 250 Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY Smallcap 250 Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: Regular: 0.08% Direct: 0.08%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty Largemidcap 250 Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "Nifty LargeMidcap 250 Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: Regular: 0.04% Direct: 0.05%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty500 Multicap 50:25:25 Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "Nifty500 Multicap 50:25:25 Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: Regular: 0.04% Direct: 0.05%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty Realty Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY Realty Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: Regular: 0.09% Direct: 0.10%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty India Digital Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "Nifty India Digital Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based daily rolling returns for the last 12 months: Regular: 0.06% Direct: 0.07%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty India Consumption Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "Nifty India Consumption Index (TRI)",
-    "additional_benchmark": "NIFTY 50 (TRI) TRACKING ERROR Annualised Standard Deviation (tracking error) h been calculated based on the available data, i.e. since inception: Regular: 0.12% Direct: 0.13%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes yea",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty Top 20 Equal Weight Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "Nifty Top 20 Equal Weight Index (TRI)",
-    "additional_benchmark": "Nifty 50 (TRI) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: Regular: 0.08% Direct: 0.09%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty50 Equal Weight Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY50 Equal Weight Total Returns Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based daily rolling returns for the last 12 months: Regular: 0.04% Direct: 0.05%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty 100 Equal Weight Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY 100 Equal Weight Total Returns Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: Regular: 0.09% Direct: 0.08%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty200 Momentum 30 Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY200 Momentum 30 Total Returns Inde (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based on daily rolling returns for the last 12 months: Regular: 0.27% Direct: 0.28%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes yea",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty100 Low Volatility 30 Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY100 Low Volatility 30 Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based on daily rolling returns for the last 12 months: Regular: 0.05% Direct: 0.06%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty100 Quality 30 Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "Nifty100 Quality 30 Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based on daily rolling returns for the last 12 months: Regular: 0.07% Direct: 0.08%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Crisil-Ibx Financial Services 3-6 Months Debt Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "CRISIL-IBX Financial Services 3-6 Months Deb Index \u201cthe Underlying Index\u201d",
-    "additional_benchmark": "CRISIL 1 Year T-bill Index TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: Regular: 0.13% Direct: 0.13% Debt Index Replication Factor (DIRF): 58.73%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anupam Joshi",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Crisil-Ibx Financial Services 9-12 Months Debt Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "CRISIL-IBX Financial Services 9-12 Months De Index",
-    "additional_benchmark": "CRISIL 1 year T-Bill Index TRACKING ERROR Annualised Standard Deviation (tracking erro has been calculated based on the available dat i.e. since inception: Regular: 0.20% Direct: 0.20% Debt Index Replication Factor (DIRF): 70.66%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anupam Joshi Praveen Jain",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty G-Sec Dec 2026 Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY G-Sec Dec 2026 Index",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: Regular: 0.40% Direct: 0.40% Debt Index Replication Factor (DIRF): 98.63%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anupam Joshi Sankalp Baid",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty G-Sec Jun 2027 Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY G-Sec Jun 2027 Index",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: Regular: 0.41% Direct: 0.41% Debt Index Replication Factor (DIRF): 99.48%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anupam Joshi Sankalp Baid",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty G-Sec Apr 2029 Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY G- Sec Apr 2029 Index",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index Debt Index Replication Factor (DIRF): 97.54%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anupam Joshi Sankalp Baid",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty G-Sec Jul 2031 Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY G-Sec July 2031 Index",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: Regular: 1.31% Direct: 1.31% Debt Index Replication Factor (DIRF): 96.87%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anupam Joshi Sankalp Baid",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty G-Sec Sep 2032 Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY G-Sec Sep 2032 Index",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: Regular: 1.84% Direct: 1.84% Debt Index Replication Factor (DIRF): 97.38%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anupam Joshi Sankalp Baid",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty G-Sec Jun 2036 Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY G-Sec Jun 2036 Index",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: Regular: 1.43% Direct: 1.43% Debt Index Replication Factor (DIRF): 98.79%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anupam Joshi Sankalp Baid",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty Sdl Plus G-Sec Jun 2027 40:60 Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY SDL Plus G-Sec Jun 2027 40:60 Index",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: Regular: 0.44% Direct: 0.44% Debt Index Replication Factor (DIRF): 95.79%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anupam Joshi Sankalp Baid",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty Sdl Oct 2026 Index Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY SDL Oct 2026 Index",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index TRACKING ERROR Annualised tracking error is calculated based on daily rolling returns for the last 12 months: Regular: 0.45% Direct: 0.45% Debt Index Replication Factor (DIRF): 96.28%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Anupam Joshi Sankalp Baid",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty 50 Etf",
-    "factsheet_month": "Unknown",
-    "benchmark": "Nifty 50 Index (TRI)",
-    "additional_benchmark": "BSE SENSEX Index (TRI) TRACKING ERROR Annualised tracking error is calculated based daily rolling returns for the last 12 months: 0.02%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Abhishek Mor Scrip Code: BSE: 539516/ NSE: HDFCNIFTY",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty 100 Etf",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY 100 Total Returns Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: 0.02%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Abhishek Mor Scrip Code: BSE: 543569/ NSE: HDFCNIF100",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Bse Sensex Etf",
-    "factsheet_month": "Unknown",
-    "benchmark": "BSE SENSEX Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: 0.02%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Abhishek Mor Scrip Code: BSE: 539517/ NSE: HDFCSENSEX",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Bse 500 Etf",
-    "factsheet_month": "Unknown",
-    "benchmark": "BSE 500 Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: 0.02%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Abhishek Mor Nandita Menezes",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty Next 50 Etf",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY Next 50 Total Returns Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based daily rolling returns for the last 12 months: 0.07%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Abhishek Mor Scrip Code: BSE: 543570/ NSE: HDFCNEXT50",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty Midcap 150 Etf",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY Midcap 150 Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: 0.04%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Abhishek Mor Nandita Menezes Scrip Code: BSE: 543776/ NSE: HDFCMID150",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty Smallcap 250 Etf",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY Smallcap 250 Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: 0.08%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Abhishek Mor Nandita Menezes Scrip Code: BSE: 543775/ NSE: HDFCSML250",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty Bank Etf",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY Bank Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: 0.03%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Abhishek Mor Scrip Code: BSE : 543224/ NSE: HDFCNIFBA",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty Private Bank Etf",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY Private Bank Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: 0.02%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Abhishek Mor Scrip Code: BSE: 543666/ NSE: HDFCPVTBA",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty Psu Bank Etf",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY PSU Bank Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: 0.07%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Abhishek Mor Scrip Code: BSE : 544110/ NSE: HDFCPSUBK",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty It Etf",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY IT Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: 0.05%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Abhishek Mor Scrip Code: BSE: 543665/ NSE: HDFCNIFIT",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty100 Quality 30 Etf",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY100 Quality 30 Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based on daily rolling returns for the last 12 months: 0.07%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Abhishek Mor yea Scrip Code: BSE: 543605/ NSE: HDFCQUAL",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty50 Value 20 Etf",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY50 Value 20 Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: 0.09%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Abhishek Mor Scrip Code: BSE: 543608/ NSE: HDFCVALUE",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty Growth Sectors 15 Etf",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY Growth Sectors 15 Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: 0.08%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Abhishek Mor Scrip Code: BSE: 543607/ NSE: HDFCGROWT",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty200 Momentum 30 Etf",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY 200 Momentum 30 Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based on daily rolling returns for the last 12 months: 0.22%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Abhishek Mor yea Scrip Code: BSE: 543628/ NSE: HDFCMOMEN",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty100 Low Volatility 30 Etf",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY100 Low Volatility 30 Index (TRI)",
-    "additional_benchmark": "Nifty 50 Index (TRI) TRACKING ERROR Annualised tracking error is calculated based on daily rolling returns for the last 12 months: 0.03%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Arun Agarwal Abhishek Mor yea Scrip Code: BSE: 543627/ NSE: HDFCLOWVO",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Nifty 1D Rate Liquid Etf - Growth",
-    "factsheet_month": "Unknown",
-    "benchmark": "NIFTY 1D Rate Index",
-    "additional_benchmark": "CRISIL 10 Year Gilt Index TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: 0.02% Debt Index Replication Factor (DIRF): 99.50%",
-    "isin": "",
-    "fund_managers": [
-      {
-        "role": "Fund Manager",
-        "name": "Swapnil Jangam Rohan Pillai Scrip Code: BSE: 543973/ NSE: HDFCLIQUID",
-        "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": null
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Gold Etf",
-    "factsheet_month": "Unknown",
-    "benchmark": "Domestic Price of Physical Gold TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: 0.39%",
     "additional_benchmark": null,
     "isin": "",
     "fund_managers": [
       {
         "role": "Fund Manager",
-        "name": "Bhagyesh Kagalkar (Dedicated Fund Manager for commodities related investments viz. Gold) Scrip Code: BSE : 533230/ NSE: HDFCGOLD",
-        "sleeve": null
+        "name": "Sanjay Doshi",
+        "sleeve": "Equity"
+      },
+      {
+        "role": "Fund Manager",
+        "name": "Abhishek K S",
+        "sleeve": "Debt"
       }
     ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
+    "holdings": [
+      {
+        "company": "Cyient Dlm Ltd",
+        "sector": "Aerospace & Defense",
+        "pct_to_net_assets": "1.46"
+      },
+      {
+        "company": "Tata Motors Ltd",
+        "sector": "Agricultural, Commercial & Construction Vehicles",
+        "pct_to_net_assets": "1.99"
+      },
+      {
+        "company": "BEML Limited",
+        "sector": "Agricultural, Commercial & Construction Vehicles",
+        "pct_to_net_assets": "1.01"
+      },
+      {
+        "company": "ZF Commercial Vehicle Control Systems India Limited",
+        "sector": "Auto Components",
+        "pct_to_net_assets": "2.18"
+      },
+      {
+        "company": "Mahindra & Mahindra Limited",
+        "sector": "Automobiles",
+        "pct_to_net_assets": "2.61"
+      },
+      {
+        "company": "Bajaj Auto Limited",
+        "sector": "Automobiles",
+        "pct_to_net_assets": "1.83"
+      },
+      {
+        "company": "ICICI Bank Limited",
+        "sector": "Banks",
+        "pct_to_net_assets": "5.45"
+      },
+      {
+        "company": "HDFC Bank Limited",
+        "sector": "Banks",
+        "pct_to_net_assets": "5.42"
+      },
+      {
+        "company": "State Bank of India",
+        "sector": "Banks",
+        "pct_to_net_assets": "3.63"
+      },
+      {
+        "company": "The Federal Bank Limited",
+        "sector": "Banks",
+        "pct_to_net_assets": "2.96"
+      },
+      {
+        "company": "Bank of Baroda",
+        "sector": "Banks",
+        "pct_to_net_assets": "2.67"
+      },
+      {
+        "company": "United Spirits Limited",
+        "sector": "Beverages",
+        "pct_to_net_assets": "2.04"
+      },
+      {
+        "company": "ICICI Prudential Asset Management Company Limited",
+        "sector": "Capital Markets",
+        "pct_to_net_assets": "2.50"
+      },
+      {
+        "company": "360 One WAM Limited",
+        "sector": "Capital Markets",
+        "pct_to_net_assets": "2.23"
+      },
+      {
+        "company": "Aether Industries Limited",
+        "sector": "Chemicals & Petrochemicals",
+        "pct_to_net_assets": "1.97"
+      },
+      {
+        "company": "Deepak Fertilizers and Petrochemicals Corporation Limited",
+        "sector": "Chemicals & Petrochemicals",
+        "pct_to_net_assets": "1.28"
+      },
+      {
+        "company": "Larsen & Toubro Limited",
+        "sector": "Construction",
+        "pct_to_net_assets": "1.49"
+      },
+      {
+        "company": "Dixon Technologies (India) Limited",
+        "sector": "Consumer Durables",
+        "pct_to_net_assets": "1.80"
+      },
+      {
+        "company": "Kajaria Ceramics Limited",
+        "sector": "Consumer Durables",
+        "pct_to_net_assets": "1.60"
+      },
+      {
+        "company": "Avalon Technologies Limited",
+        "sector": "Electrical Equipment",
+        "pct_to_net_assets": "1.90"
+      },
+      {
+        "company": "Emmvee Photovoltaic Power Limited",
+        "sector": "Electrical Equipment",
+        "pct_to_net_assets": "1.75"
+      },
+      {
+        "company": "CG Power and Industrial Solutions Limited",
+        "sector": "Electrical Equipment",
+        "pct_to_net_assets": "1.71"
+      },
+      {
+        "company": "Tata Steel Limited",
+        "sector": "Ferrous Metals",
+        "pct_to_net_assets": "2.31"
+      },
+      {
+        "company": "IIFL Finance Limited",
+        "sector": "Finance",
+        "pct_to_net_assets": "1.79"
+      },
+      {
+        "company": "PNB Housing Finance Limited",
+        "sector": "Finance",
+        "pct_to_net_assets": "1.67"
+      },
+      {
+        "company": "Edelweiss Financial Services Limited",
+        "sector": "Finance",
+        "pct_to_net_assets": "1.17"
+      },
+      {
+        "company": "PB Fintech Limited",
+        "sector": "Financial Technology (Fintech)",
+        "pct_to_net_assets": "1.23"
+      },
+      {
+        "company": "Heritage Foods Limited",
+        "sector": "Food Products",
+        "pct_to_net_assets": "0.80"
+      },
+      {
+        "company": "Inox India Limited",
+        "sector": "Industrial Products",
+        "pct_to_net_assets": "2.81"
+      },
+      {
+        "company": "Kirloskar Pneumatic Company Limited",
+        "sector": "Industrial Products",
+        "pct_to_net_assets": "1.61"
+      },
+      {
+        "company": "ICICI Prudential Life Insurance Company Limited",
+        "sector": "Insurance",
+        "pct_to_net_assets": "1.39"
+      },
+      {
+        "company": "Oracle Financial Services Software Limited",
+        "sector": "IT - Software",
+        "pct_to_net_assets": "2.83"
+      },
+      {
+        "company": "Leela Palaces Hotels & Resorts Limited",
+        "sector": "Leisure Services",
+        "pct_to_net_assets": "1.70"
+      },
+      {
+        "company": "Vedanta Aluminium Metal Limited",
+        "sector": "Non - Ferrous Metals",
+        "pct_to_net_assets": "2.03"
+      },
+      {
+        "company": "Reliance Industries Limited",
+        "sector": "Petroleum Products",
+        "pct_to_net_assets": "3.42"
+      },
+      {
+        "company": "Divi's Laboratories Limited",
+        "sector": "Pharmaceuticals & Biotechnology",
+        "pct_to_net_assets": "2.85"
+      },
+      {
+        "company": "Lupin Limited",
+        "sector": "Pharmaceuticals & Biotechnology",
+        "pct_to_net_assets": "2.01"
+      },
+      {
+        "company": "Ajanta Pharma Limited",
+        "sector": "Pharmaceuticals & Biotechnology",
+        "pct_to_net_assets": "1.42"
+      },
+      {
+        "company": "Supriya Lifescience Limited",
+        "sector": "Pharmaceuticals & Biotechnology",
+        "pct_to_net_assets": "1.03"
+      },
+      {
+        "company": "NTPC Limited",
+        "sector": "Power",
+        "pct_to_net_assets": "1.41"
+      },
+      {
+        "company": "Vedanta Power Ltd",
+        "sector": "Power",
+        "pct_to_net_assets": "1.00"
+      },
+      {
+        "company": "DLF Limited",
+        "sector": "Realty",
+        "pct_to_net_assets": "1.52"
+      },
+      {
+        "company": "Arvind Fashions Limited",
+        "sector": "Retailing",
+        "pct_to_net_assets": "1.77"
+      },
+      {
+        "company": "Urban Company Ltd",
+        "sector": "Retailing",
+        "pct_to_net_assets": "1.48"
+      },
+      {
+        "company": "Indus Towers Limited",
+        "sector": "Telecom - Services",
+        "pct_to_net_assets": "2.59"
+      }
     ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
+    "needs_review": false,
+    "review_reasons": [],
+    "source_file": "Abakkus_Mutual_Fund_Abakkus_Mutual_Fund_Factsheet_June_2026_a8749aaaae.pdf",
     "possible_duplicate_of": null
   },
   {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Silver Etf",
+    "amc_name": "Abakkus Mutual Fund Abakkus Mutual Fund Factsheet",
+    "scheme_name": "Abakkus Small Cap Fund",
     "factsheet_month": "Unknown",
-    "benchmark": "Domestic Prices of physical Silver (derived as per regulatory norms) TRACKING ERROR Annualised tracking error is calculated based o daily rolling returns for the last 12 months: 0.93%",
+    "benchmark": "Nifty Smallcap 250 TRI",
     "additional_benchmark": null,
     "isin": "",
     "fund_managers": [
       {
         "role": "Fund Manager",
-        "name": "Bhagyesh Kagalkar Scrip Code: BSE : 543592/ NSE: HDFCSILVER",
-        "sleeve": null
+        "name": "Sanjay Doshi",
+        "sleeve": "Equity"
+      },
+      {
+        "role": "Fund Manager",
+        "name": "Abhishek K S",
+        "sleeve": "Debt"
       }
     ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
+    "holdings": [
+      {
+        "company": "Cyient Dlm Ltd",
+        "sector": "Aerospace & Defense",
+        "pct_to_net_assets": "0.27"
+      },
+      {
+        "company": "ZF Commercial Vehicle Control Systems India Limited",
+        "sector": "Auto Components",
+        "pct_to_net_assets": "1.80"
+      },
+      {
+        "company": "Sansera Engineering Limited",
+        "sector": "Auto Components",
+        "pct_to_net_assets": "1.60"
+      },
+      {
+        "company": "SPR Auto Technologies Ltd",
+        "sector": "Auto Components",
+        "pct_to_net_assets": "1.57"
+      },
+      {
+        "company": "Gabriel India Limited",
+        "sector": "Auto Components",
+        "pct_to_net_assets": "1.49"
+      },
+      {
+        "company": "Equitas Small Finance Bank Limited",
+        "sector": "Banks",
+        "pct_to_net_assets": "1.67"
+      },
+      {
+        "company": "HDFC Bank Limited",
+        "sector": "Banks",
+        "pct_to_net_assets": "1.60"
+      },
+      {
+        "company": "Karur Vysya Bank Limited",
+        "sector": "Banks",
+        "pct_to_net_assets": "1.59"
+      },
+      {
+        "company": "State Bank of India",
+        "sector": "Banks",
+        "pct_to_net_assets": "1.51"
+      },
+      {
+        "company": "RBL Bank Limited",
+        "sector": "Banks",
+        "pct_to_net_assets": "1.42"
+      },
+      {
+        "company": "Bank of Baroda",
+        "sector": "Banks",
+        "pct_to_net_assets": "1.09"
+      },
+      {
+        "company": "Computer Age Management Services Limited",
+        "sector": "Capital Markets",
+        "pct_to_net_assets": "1.73"
+      },
+      {
+        "company": "Central Depository Services (India) Limited",
+        "sector": "Capital Markets",
+        "pct_to_net_assets": "1.57"
+      },
+      {
+        "company": "Canara Robeco Asset Management Company Ltd",
+        "sector": "Capital Markets",
+        "pct_to_net_assets": "1.30"
+      },
+      {
+        "company": "Aether Industries Limited",
+        "sector": "Chemicals & Petrochemicals",
+        "pct_to_net_assets": "1.67"
+      },
+      {
+        "company": "Wework India Management Limited",
+        "sector": "Commercial Services & Supplies",
+        "pct_to_net_assets": "1.61"
+      },
+      {
+        "company": "International Gemological Institute Limited",
+        "sector": "Commercial Services & Supplies",
+        "pct_to_net_assets": "1.54"
+      },
+      {
+        "company": "Cemindia Projects Ltd",
+        "sector": "Construction",
+        "pct_to_net_assets": "1.82"
+      },
+      {
+        "company": "NCC Limited",
+        "sector": "Construction",
+        "pct_to_net_assets": "1.39"
+      },
+      {
+        "company": "PNC Infratech Limited",
+        "sector": "Construction",
+        "pct_to_net_assets": "1.27"
+      },
+      {
+        "company": "Kajaria Ceramics Limited",
+        "sector": "Consumer Durables",
+        "pct_to_net_assets": "1.62"
+      },
+      {
+        "company": "Century Plyboards (India) Limited",
+        "sector": "Consumer Durables",
+        "pct_to_net_assets": "1.50"
+      },
+      {
+        "company": "PG Electroplast Limited",
+        "sector": "Consumer Durables",
+        "pct_to_net_assets": "1.07"
+      },
+      {
+        "company": "Emmvee Photovoltaic Power Limited",
+        "sector": "Electrical Equipment",
+        "pct_to_net_assets": "1.61"
+      },
+      {
+        "company": "Avalon Technologies Limited",
+        "sector": "Electrical Equipment",
+        "pct_to_net_assets": "1.38"
+      },
+      {
+        "company": "Saregama India Limited",
+        "sector": "Entertainment",
+        "pct_to_net_assets": "1.48"
+      },
+      {
+        "company": "Rallis India Limited",
+        "sector": "Fertilizers & Agrochemicals",
+        "pct_to_net_assets": "1.15"
+      },
+      {
+        "company": "PNB Housing Finance Limited",
+        "sector": "Finance",
+        "pct_to_net_assets": "1.74"
+      },
+      {
+        "company": "IIFL Finance Limited",
+        "sector": "Finance",
+        "pct_to_net_assets": "1.61"
+      },
+      {
+        "company": "Edelweiss Financial Services Limited",
+        "sector": "Finance",
+        "pct_to_net_assets": "1.33"
+      },
+      {
+        "company": "Q-Line Biotech Ltd",
+        "sector": "Healthcare Equipment & Supplies",
+        "pct_to_net_assets": "1.44"
+      },
+      {
+        "company": "Dr. Lal Path Labs Limited",
+        "sector": "Healthcare Services",
+        "pct_to_net_assets": "1.76"
+      },
+      {
+        "company": "Rainbow Childrens Medicare Limited",
+        "sector": "Healthcare Services",
+        "pct_to_net_assets": "1.66"
+      },
+      {
+        "company": "The Anup Engineering Limited",
+        "sector": "Industrial Manufacturing",
+        "pct_to_net_assets": "1.40"
+      },
+      {
+        "company": "Kirloskar Oil Engines Limited",
+        "sector": "Industrial Products",
+        "pct_to_net_assets": "1.97"
+      },
+      {
+        "company": "Inox India Limited",
+        "sector": "Industrial Products",
+        "pct_to_net_assets": "1.63"
+      },
+      {
+        "company": "Welspun Corp Limited",
+        "sector": "Industrial Products",
+        "pct_to_net_assets": "1.58"
+      },
+      {
+        "company": "Kirloskar Pneumatic Company Limited",
+        "sector": "Industrial Products",
+        "pct_to_net_assets": "1.56"
+      },
+      {
+        "company": "Jindal Saw Ltd",
+        "sector": "Industrial Products",
+        "pct_to_net_assets": "1.47"
+      },
+      {
+        "company": "Godawari Power and Ispat Ltd",
+        "sector": "Industrial Products",
+        "pct_to_net_assets": "1.28"
+      },
+      {
+        "company": "Star Health And Allied Insurance Company Limited",
+        "sector": "Insurance",
+        "pct_to_net_assets": "1.75"
+      },
+      {
+        "company": "Rategain Travel Technologies Limited",
+        "sector": "IT - Software",
+        "pct_to_net_assets": "1.62"
+      },
+      {
+        "company": "Oracle Financial Services Software Limited",
+        "sector": "IT - Software",
+        "pct_to_net_assets": "1.51"
+      },
+      {
+        "company": "Intellect Design Arena Limited",
+        "sector": "IT - Software",
+        "pct_to_net_assets": "1.21"
+      },
+      {
+        "company": "Tanla Platforms Limited",
+        "sector": "IT - Software",
+        "pct_to_net_assets": "1.12"
+      },
+      {
+        "company": "Leela Palaces Hotels & Resorts Limited",
+        "sector": "Leisure Services",
+        "pct_to_net_assets": "1.52"
+      },
+      {
+        "company": "Vedanta Aluminium Metal Limited",
+        "sector": "Non - Ferrous Metals",
+        "pct_to_net_assets": "1.50"
+      },
+      {
+        "company": "ION Exchange (India) Limited",
+        "sector": "Other Utilities",
+        "pct_to_net_assets": "1.37"
+      },
+      {
+        "company": "Alembic Pharmaceuticals Limited",
+        "sector": "Pharmaceuticals & Biotechnology",
+        "pct_to_net_assets": "1.68"
+      },
+      {
+        "company": "Neuland Laboratories Limited",
+        "sector": "Pharmaceuticals & Biotechnology",
+        "pct_to_net_assets": "1.62"
+      },
+      {
+        "company": "Divi's Laboratories Limited",
+        "sector": "Pharmaceuticals & Biotechnology",
+        "pct_to_net_assets": "1.41"
+      },
+      {
+        "company": "Jubilant Pharmova Limited",
+        "sector": "Pharmaceuticals & Biotechnology",
+        "pct_to_net_assets": "1.40"
+      },
+      {
+        "company": "Sanofi Consumer Healthcare India Limited",
+        "sector": "Pharmaceuticals & Biotechnology",
+        "pct_to_net_assets": "1.37"
+      },
+      {
+        "company": "Sanofi India Limited",
+        "sector": "Pharmaceuticals & Biotechnology",
+        "pct_to_net_assets": "1.24"
+      },
+      {
+        "company": "Vedanta Power Ltd",
+        "sector": "Power",
+        "pct_to_net_assets": "1.35"
+      },
+      {
+        "company": "Arvind Fashions Limited",
+        "sector": "Retailing",
+        "pct_to_net_assets": "1.55"
+      },
+      {
+        "company": "Vedant Fashions Limited",
+        "sector": "Retailing",
+        "pct_to_net_assets": "1.43"
+      },
+      {
+        "company": "Urban Company Ltd",
+        "sector": "Retailing",
+        "pct_to_net_assets": "1.27"
+      },
+      {
+        "company": "K.P.R. Mill Limited",
+        "sector": "Textiles & Apparels",
+        "pct_to_net_assets": "1.58"
+      },
+      {
+        "company": "Kewal Kiran Clothing Limited",
+        "sector": "Textiles & Apparels",
+        "pct_to_net_assets": "0.45"
+      },
+      {
+        "company": "Container Corporation of India Limited",
+        "sector": "Transport Services",
+        "pct_to_net_assets": "1.11"
+      }
     ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
+    "needs_review": false,
+    "review_reasons": [],
+    "source_file": "Abakkus_Mutual_Fund_Abakkus_Mutual_Fund_Factsheet_June_2026_a8749aaaae.pdf",
     "possible_duplicate_of": null
   },
   {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Gold Etf Fund Of Fund",
+    "amc_name": "Abakkus Mutual Fund Abakkus Mutual Fund Factsheet",
+    "scheme_name": "Abakkus Liquid Fund",
     "factsheet_month": "Unknown",
-    "benchmark": "Domestic Price of Physical Gold",
+    "benchmark": "CRISIL Liquid Debt A-I",
     "additional_benchmark": null,
     "isin": "",
     "fund_managers": [
       {
         "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes",
+        "name": "Abhishek K S",
         "sleeve": null
-      }
-    ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf"
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Hdfc Silver Etf Fund Of Fund",
-    "factsheet_month": "Unknown",
-    "benchmark": "Domestic Prices of physical Silver (derived as per regulatory norms)",
-    "additional_benchmark": null,
-    "isin": "",
-    "fund_managers": [
+      },
       {
         "role": "Fund Manager",
-        "name": "Arun Agarwal Nandita Menezes",
+        "name": "Sanjay Doshi",
         "sleeve": null
       }
     ],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "holdings_table_not_found"
+    "holdings": [
+      {
+        "company": "HDFC Bank Limited",
+        "sector": "A1+/AAA",
+        "pct_to_net_assets": "7.67"
+      },
+      {
+        "company": "Canara Bank",
+        "sector": "A1+/AAA",
+        "pct_to_net_assets": "6.42"
+      },
+      {
+        "company": "Bank of Baroda",
+        "sector": "A1+/AAA",
+        "pct_to_net_assets": "6.39"
+      },
+      {
+        "company": "Union Bank of India",
+        "sector": "A1+/AAA",
+        "pct_to_net_assets": "6.39"
+      },
+      {
+        "company": "Axis Bank Ltd.",
+        "sector": "A1+/AAA",
+        "pct_to_net_assets": "5.13"
+      },
+      {
+        "company": "Small Industries Dev Bank of India",
+        "sector": "A1+/AAA",
+        "pct_to_net_assets": "6.40"
+      },
+      {
+        "company": "Kotak Securities Limited",
+        "sector": "A1+/AAA",
+        "pct_to_net_assets": "5.12"
+      },
+      {
+        "company": "National Bank For Agriculture and Rural Development",
+        "sector": "A1+/AAA",
+        "pct_to_net_assets": "5.11"
+      },
+      {
+        "company": "Tata Capital Housing Finance Limited",
+        "sector": "A1+/AAA",
+        "pct_to_net_assets": "3.87"
+      },
+      {
+        "company": "ICICI Securities Limited",
+        "sector": "A1+/AAA",
+        "pct_to_net_assets": "3.83"
+      },
+      {
+        "company": "Bajaj Finance Limited",
+        "sector": "A1+/AAA",
+        "pct_to_net_assets": "2.57"
+      },
+      {
+        "company": "Cholamandalam Investment and Finance Company Limited",
+        "sector": "A1+/AAA",
+        "pct_to_net_assets": "2.56"
+      },
+      {
+        "company": "L&T Finance Limited",
+        "sector": "A1+/AAA",
+        "pct_to_net_assets": "1.29"
+      },
+      {
+        "company": "Treasury Bill",
+        "sector": "Sovereign",
+        "pct_to_net_assets": "14.15"
+      },
+      {
+        "company": "LIC Housing Finance Limited",
+        "sector": "A1+/AAA",
+        "pct_to_net_assets": "3.88"
+      },
+      {
+        "company": "National Bank For Agriculture and Rural Development",
+        "sector": "A1+/AAA",
+        "pct_to_net_assets": "2.59"
+      },
+      {
+        "company": "Power Finance Corporation Limited",
+        "sector": "A1+/AAA",
+        "pct_to_net_assets": "2.58"
+      },
+      {
+        "company": "Bajaj Housing Finance Limited",
+        "sector": "A1+/AAA",
+        "pct_to_net_assets": "1.30"
+      },
+      {
+        "company": "Godrej Industries Limited",
+        "sector": "AA+",
+        "pct_to_net_assets": "1.30"
+      }
     ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf"
-  },
-  {
-    "amc_name": "HDFC Mutual Fund HDFC Mutual Fund Index Solutions Factsheet - June 2026",
-    "scheme_name": "Fund Details Annexure",
-    "factsheet_month": "Unknown",
-    "benchmark": null,
-    "additional_benchmark": null,
-    "isin": "",
-    "fund_managers": [],
-    "holdings": [],
-    "needs_review": true,
-    "review_reasons": [
-      "benchmark_not_found",
-      "fund_manager_not_found",
-      "holdings_table_not_found"
-    ],
-    "source_file": "HDFC_Mutual_Fund_HDFC MF Index Solutions Factsheet - June 2026_1.pdf",
-    "possible_duplicate_of": "HDFC_Mutual_Fund_HDFC MF Factsheet - June 2026.pdf"
+    "needs_review": false,
+    "review_reasons": [],
+    "source_file": "Abakkus_Mutual_Fund_Abakkus_Mutual_Fund_Factsheet_June_2026_a8749aaaae.pdf",
+    "possible_duplicate_of": null
   }
 ]

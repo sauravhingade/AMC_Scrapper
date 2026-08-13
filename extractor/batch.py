@@ -10,8 +10,8 @@ import argparse
 import json
 import os
 
-from .extractor import extract_factsheet_data
 from .config import INPUT_DIR, OUTPUT_DIR
+from .extractor import extract_factsheet_data
 
 
 def _amc_name_from_filename(filename: str) -> str:
@@ -23,13 +23,32 @@ def _amc_name_from_filename(filename: str) -> str:
     """
     stem = filename.rsplit(".", 1)[0]
     parts = stem.split("_")
-    while parts and (parts[-1].isdigit() or len(parts[-1]) in (8, 10) or parts[-1] in
-                     ("Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec")):
+    while parts and (
+        parts[-1].isdigit()
+        or len(parts[-1]) in (8, 10)
+        or parts[-1]
+        in (
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "June",
+            "July",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+        )
+    ):
         parts.pop()
     return " ".join(parts).replace("MF", "Mutual Fund").strip()
 
 
-def process_pdf(pdf_path: str, amc_name: str, factsheet_month: str = "Unknown") -> list[dict]:
+def process_pdf(
+    pdf_path: str, amc_name: str, factsheet_month: str = "Unknown"
+) -> list[dict]:
     records = extract_factsheet_data(amc_name, pdf_path, factsheet_month)
     return [r.model_dump() for r in records]
 
@@ -74,8 +93,14 @@ def run(amc_filter: str | None = None):
 
             all_results.extend(results)
             flagged = sum(1 for r in results if r["needs_review"])
-            dupe_note = f", {possible_dupes} flagged as possible_duplicate (kept, not dropped)" if possible_dupes else ""
-            print(f"  -> {len(results)} schemes ({flagged} flagged for review{dupe_note})")
+            dupe_note = (
+                f", {possible_dupes} flagged as possible_duplicate (kept, not dropped)"
+                if possible_dupes
+                else ""
+            )
+            print(
+                f"  -> {len(results)} schemes ({flagged} flagged for review{dupe_note})"
+            )
         except Exception as e:
             print(f"  !! FAILED: {e}")
 
@@ -88,7 +113,11 @@ def run(amc_filter: str | None = None):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--amc", type=str, default=None, help="Filter to one AMC by name substring")
-    parser.add_argument("--all", action="store_true", help="Process all PDFs in downloads/")
+    parser.add_argument(
+        "--amc", type=str, default=None, help="Filter to one AMC by name substring"
+    )
+    parser.add_argument(
+        "--all", action="store_true", help="Process all PDFs in downloads/"
+    )
     args = parser.parse_args()
     run(amc_filter=args.amc)

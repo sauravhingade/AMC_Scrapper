@@ -6,15 +6,18 @@ your scraper's download_factsheet(), just no download step:
     # -> list[SchemeRecord], one per scheme found in the PDF
 """
 
-from .pdf_reader import open_pdf
-from .segmenter import segment_schemes
-from .schema import SchemeRecord, FundManager, Holding
 from .amc import get_extractor
+from .pdf_reader import open_pdf
+from .schema import FundManager, Holding, SchemeRecord
+from .segmenter import segment_schemes
 
 
-def extract_factsheet_data(amc_name: str, pdf_path: str, factsheet_month: str) -> list[SchemeRecord]:
+def extract_factsheet_data(
+    amc_name: str, pdf_path: str, factsheet_month: str
+) -> list[SchemeRecord]:
     records: list[SchemeRecord] = []
     extractor_module = get_extractor(amc_name)
+    print(f"extractor module : {extractor_module}")
 
     with open_pdf(pdf_path) as pdf:
         scheme_pages = segment_schemes(pdf)

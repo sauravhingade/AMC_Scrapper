@@ -10,6 +10,7 @@ five AMC-specific flags.
 """
 
 import re
+
 from ..config import HOLDINGS_CATEGORY_LABELS
 
 NUMERIC_PCT = re.compile(r"^-?\d+(\.\d+)?$")

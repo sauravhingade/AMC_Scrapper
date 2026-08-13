@@ -10,10 +10,108 @@ other AMC module.
 """
 
 import re
-from ..pdf_reader import get_column_text, get_column_tables
-from .common import is_real_holding_row
+
+import pdfplumber
+
+from ..config import HOLDINGS_CATEGORY_LABELS
+
+NUMERIC_PCT = re.compile(r"^-?\d+(\.\d+)?$")
+
+
+def normalize_label(s: str) -> str:
+    return re.sub(r"[\s\-]+", "", s.lower())
+
+
+_NORMALIZED_CATEGORY_LABELS = {normalize_label(l) for l in HOLDINGS_CATEGORY_LABELS}
 
 SIDEBAR_WIDTH = 152
+
+
+def reconstruct_lines(words, y_tolerance: float = 1.5) -> str:
+    """Group words into lines by y-position, sort each line left-to-right.
+
+    y_tolerance was originally 3.0, which merges lines whose baselines sit
+    within 3pt of each other. Found via testing: a name that wraps to a new
+    line (e.g. "Mehta") can land within 3pt of a small sleeve-role tag
+    ("Equity"/"Debt") positioned elsewhere on the page, causing the two to
+    merge into one reconstructed line with WRONG x-order -- the tag (further
+    left) sorts before the wrapped name, corrupting extraction. 1.5pt keeps
+    genuinely-same-line words together while separating near-miss cases like
+    this one.
+    """
+    lines = {}
+    for w in words:
+        y = round(w["top"] / y_tolerance) * y_tolerance
+        lines.setdefault(y, []).append(w)
+    return "\n".join(
+        " ".join(w["text"] for w in sorted(lines[y], key=lambda w: w["x0"]))
+        for y in sorted(lines)
+    )
+
+
+def get_column_text(page, x0: float, x1: float) -> str:
+    """Extract clean text from a vertical column slice of a page, by
+    physically cropping the page to the bbox first.
+
+    GOTCHA (found via testing against an HDFC factsheet, doesn't show up on
+    360 ONE's layout): page.within_bbox() clips glyphs AT the boundary --
+    if a word straddles x1 (e.g. "(TRI)" starting inside the column but
+    ending just past it), the clip cuts the word mid-character ("(TRI)"
+    becomes "(TRI"), silently corrupting the value. This function is kept
+    as-is (360 ONE's sidebar has a clean gap at its boundary, so it never
+    hits this), but any AMC whose columns wrap text right up against the
+    crop line should use get_column_text_by_start() instead.
+    """
+    cropped = page.within_bbox((x0, 0, x1, page.height))
+    words = cropped.extract_words()
+    return reconstruct_lines(words)
+
+
+def get_column_text_by_start(page, x0: float, x1: float, x_tolerance: float = 3) -> str:
+    """Extract text from a vertical column slice, filtering by each word's
+    START position (x0) instead of physically cropping the page.
+
+    Use this instead of get_column_text() whenever a column's text wraps
+    right up against the crop boundary (no clean whitespace gap) -- keeps
+    whole words that merely *start* inside the column, even if they render
+    a few points past x1, instead of clipping them mid-character. Safe to
+    use with a generous x1 (e.g. up to where the next column's content
+    actually starts) since it can only ever pull in whole words, never
+    partial ones.
+    """
+    words = [
+        w for w in page.extract_words(x_tolerance=x_tolerance) if x0 <= w["x0"] < x1
+    ]
+    return reconstruct_lines(words)
+
+
+def get_column_tables(page, x0: float, x1: float):
+    """Extract tables from a vertical column slice of a page."""
+    cropped = page.within_bbox((x0, 0, x1, page.height))
+    return cropped.extract_tables()
+
+
+def open_pdf(path: str):
+    return pdfplumber.open(path)
+
+
+def is_real_holding_row(row) -> bool:
+    """Most AMC tables are Company/Sector/% (3 cols); commodity ETFs (Gold,
+    Silver) drop Sector since it doesn't apply -- 2 cols: Company/%."""
+    if not row or len(row) < 2:
+        return False
+    company = row[0]
+    pct = row[2] if len(row) >= 3 else row[1]
+    if not company or not pct:
+        return False
+    # Normalize away whitespace/hyphens so "Sub Total", "SubTotal", and
+    # "Sub-Total" all match the same exclusion entry -- found via testing
+    # that a bare "SubTotal" (no space) slipped past an exact "sub total"
+    # match.
+    if normalize_label(company.replace("\n", " ")) in _NORMALIZED_CATEGORY_LABELS:
+        return False
+    pct_clean = str(pct).strip().replace("\n", "")
+    return bool(NUMERIC_PCT.match(pct_clean))
 
 
 def extract_benchmark(sidebar_text: str) -> str | None:
@@ -101,7 +199,6 @@ def extract_holdings(page, table_x0: float) -> list[dict]:
     pdfplumber's line-based table detector to parse into clean columns --
     for those we fall back to a direct text-line regex on the right column.
     """
-    from ..pdf_reader import reconstruct_lines
 
     holdings = []
     for table in get_column_tables(page, table_x0, page.width):
@@ -110,11 +207,15 @@ def extract_holdings(page, table_x0: float) -> list[dict]:
         for row in table:
             if is_real_holding_row(row):
                 has_sector = len(row) >= 3
-                holdings.append({
-                    "company": row[0].replace("\n", " ").strip(),
-                    "sector": (row[1] or "").replace("\n", " ").strip() if has_sector else "",
-                    "pct_to_net_assets": (row[2] if has_sector else row[1]).strip(),
-                })
+                holdings.append(
+                    {
+                        "company": row[0].replace("\n", " ").strip(),
+                        "sector": (row[1] or "").replace("\n", " ").strip()
+                        if has_sector
+                        else "",
+                        "pct_to_net_assets": (row[2] if has_sector else row[1]).strip(),
+                    }
+                )
 
     if not holdings:
         text = get_column_text(page, table_x0, page.width)
@@ -123,7 +224,13 @@ def extract_holdings(page, table_x0: float) -> list[dict]:
             key = (m.group(1), m.group(2))
             if key not in seen:
                 seen.add(key)
-                holdings.append({"company": m.group(1), "sector": "", "pct_to_net_assets": m.group(2)})
+                holdings.append(
+                    {
+                        "company": m.group(1),
+                        "sector": "",
+                        "pct_to_net_assets": m.group(2),
+                    }
+                )
 
     return holdings
 

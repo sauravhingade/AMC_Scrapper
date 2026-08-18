@@ -13,7 +13,44 @@ import re
 
 import pdfplumber
 
-from ..config import HOLDINGS_CATEGORY_LABELS
+from ..config import HOLDINGS_CATEGORY_LABELS, HEADING_EXCLUDE, SCHEME_KEYWORDS
+
+
+BODY_MARKERS = re.compile(
+    r"Portfolio as on|Fund Manager|Benchmark Index|BENCHMARK|NAV as on|Scheme Performance",
+    re.IGNORECASE,
+)
+
+
+def _is_scheme_heading(line: str) -> bool:
+    line = line.strip()
+    if not line or len(line) > 80:
+        return False
+    if any(ex in line.upper() for ex in HEADING_EXCLUDE):
+        return False
+    upper = line.upper()
+    return any(re.search(rf"\b{kw}\b", upper) for kw in SCHEME_KEYWORDS)
+
+
+def segment_schemes(pdf) -> dict[str, list[int]]:
+    """Returns {scheme_name: [page_index, ...]} in document order."""
+    scheme_pages: dict[str, list[int]] = {}
+    current = None
+
+    for i, page in enumerate(pdf.pages):
+        text = page.extract_text() or ""
+        first_line = text.split("\n")[0].strip() if text else ""
+
+        if _is_scheme_heading(first_line):
+            current = first_line
+            scheme_pages.setdefault(current, [])
+
+        if current and BODY_MARKERS.search(text):
+            if i not in scheme_pages[current]:
+                scheme_pages[current].append(i)
+
+    return scheme_pages
+
 
 NUMERIC_PCT = re.compile(r"^-?\d+(\.\d+)?$")
 

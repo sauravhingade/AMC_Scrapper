@@ -1,21 +1,46 @@
 """
 Abakkus Mutual Fund extractor.
-
-Abakkus factsheets use a multi-column layout which is different from the
-other AMC extractors.  In particular, the equity portfolio is printed as
-TWO side-by-side portfolio columns, while the liquid-fund portfolio is a
-single wider table.
-
-This extractor is intentionally self-contained.  It is coordinate driven:
-we locate the actual portfolio header(s) on the page and then parse only the
-words belonging to those table columns.  No page number or month is hardcoded.
 """
 
 import re
 
-# ---------------------------------------------------------------------------
-# Basic helpers
-# ---------------------------------------------------------------------------
+from ..config import HEADING_EXCLUDE, SCHEME_KEYWORDS
+
+BODY_MARKERS = re.compile(
+    r"Portfolio as on|Fund Manager|Benchmark Index|BENCHMARK|NAV as on|Scheme Performance",
+    re.IGNORECASE,
+)
+
+
+def _is_scheme_heading(line: str) -> bool:
+    line = line.strip()
+    if not line or len(line) > 80:
+        return False
+    if any(ex in line.upper() for ex in HEADING_EXCLUDE):
+        return False
+    upper = line.upper()
+    return any(re.search(rf"\b{kw}\b", upper) for kw in SCHEME_KEYWORDS)
+
+
+def segment_schemes(pdf) -> dict[str, list[int]]:
+    """Returns {scheme_name: [page_index, ...]} in document order."""
+    scheme_pages: dict[str, list[int]] = {}
+    current = None
+
+    for i, page in enumerate(pdf.pages):
+        text = page.extract_text() or ""
+        first_line = text.split("\n")[0].strip() if text else ""
+
+        if _is_scheme_heading(first_line):
+            current = first_line
+            scheme_pages.setdefault(current, [])
+
+        if current and BODY_MARKERS.search(text):
+            if i not in scheme_pages[current]:
+                scheme_pages[current].append(i)
+
+    return scheme_pages
+
 
 _PERCENT_RE = re.compile(r"(-?\d+(?:\.\d+)?)\s*%")
 
@@ -104,7 +129,13 @@ def _clean(text: str) -> str:
     text = text.replace("\u00a0", " ")
     text = text.replace("\u00ad", "")
     text = text.replace("\ufeff", "")
-    text = re.sub(r"[•●▪◦]", " ", text)
+    text = re.sub(r"[•●▪◦]", " ", text)
+    # Icon/symbol fonts (e.g. the "Top Ten Holding" marker) are frequently
+    # extracted as standalone Private Use Area glyphs (U+E000-U+F8FF) rather
+    # than a real bullet character. These never carry meaningful text, so
+    # strip the whole PUA range defensively instead of hardcoding one
+    # codepoint that happens to appear in a given month's factsheet.
+    text = re.sub(r"[\ue000-\uf8ff]", " ", text)
     return re.sub(r"\s+", " ", text).strip(" \t\r\n:-")
 
 
@@ -123,7 +154,6 @@ def _page_words(page):
 
 
 def _words_to_lines(words, y_tolerance=1.5):
-    """Group words into physical PDF lines while preserving coordinates."""
     if not words:
         return []
 
@@ -162,13 +192,7 @@ def _page_text(page) -> str:
     )
 
 
-# ---------------------------------------------------------------------------
-# Metadata
-# ---------------------------------------------------------------------------
-
-
-def extract_benchmark(text: str) -> str | None:
-    """Extract the Fund Features benchmark only."""
+def extract_benchmark(text):
     if not text:
         return None
     m = re.search(
@@ -181,7 +205,7 @@ def extract_benchmark(text: str) -> str | None:
     return _clean(m.group(1)) if m else None
 
 
-def extract_additional_benchmark(text: str) -> str | None:
+def extract_additional_benchmark(text):
     if not text:
         return None
     m = re.search(
@@ -194,20 +218,17 @@ def extract_additional_benchmark(text: str) -> str | None:
     return _clean(m.group(1)) if m else None
 
 
-def extract_isin(text: str) -> str:
+def extract_isin(text):
     if not text:
         return ""
     m = re.search(r"\bISIN\s*:?\s*([A-Z0-9]{6,20})\b", text, re.IGNORECASE)
     return m.group(1).upper() if m else ""
 
 
-def extract_fund_managers(text: str) -> list[dict]:
-    """Extract managers from the explicit Fund Manager field only."""
+def extract_fund_managers(text):
     if not text:
         return []
 
-    # Only inspect the Fund Manager field, ending at the next Fund Features
-    # label. This prevents managers from the performance section leaking in.
     m = re.search(
         r"\bFund\s+Manager\s*:\s*(.+?)(?=\s+\b(?:Benchmark|Plans and Options|"
         r"Minimum Investment Amount|Minimum Additional Purchase Amount|"
@@ -265,13 +286,7 @@ def extract_fund_managers(text: str) -> list[dict]:
     return managers
 
 
-# ---------------------------------------------------------------------------
-# Portfolio header / column detection
-# ---------------------------------------------------------------------------
-
-
 def _find_portfolio_headers(page):
-    """Locate every Abakkus portfolio table header using word coordinates."""
     lines = _words_to_lines(_page_words(page))
     headers = []
 
@@ -279,9 +294,6 @@ def _find_portfolio_headers(page):
         text = line["text"]
         nearby = " ".join(x["text"] for x in lines[i : min(i + 5, len(lines))])
 
-        # Equity header is frequently extracted as:
-        #   Company % of Net Company % of Net
-        #   Assets Assets
         if re.search(r"\bCompany\b.*%\s*of", text, re.IGNORECASE) and re.search(
             r"\bNet\b.*\bAssets\b", nearby, re.IGNORECASE
         ):
@@ -296,7 +308,6 @@ def _find_portfolio_headers(page):
                     )
             continue
 
-        # Liquid/debt header.
         if re.search(
             r"\b(?:Company/Issuer|Instrument/Issuer\s+Name).*%\s*of\s*Net\b",
             text,
@@ -331,7 +342,6 @@ def _find_equity_table_ranges(page):
     if not headers:
         return []
 
-    _page_words(page)
     page_width = float(page.width)
     ranges = []
 
@@ -340,8 +350,6 @@ def _find_equity_table_ranges(page):
         if i + 1 < len(headers):
             right = headers[i + 1]["x0"] - 5
         else:
-            # The second equity table ends before the page edge, but using
-            # page width is safe because we stop at Grand Total.
             right = page_width
         ranges.append((left, right, header))
 
@@ -368,18 +376,13 @@ def _column_lines(page, left, right, start_top):
     return _words_to_lines(words)
 
 
-# ---------------------------------------------------------------------------
-# Equity portfolio parser
-# ---------------------------------------------------------------------------
-
-
-def _is_equity_sector(text: str) -> bool:
+def _is_equity_sector(text):
     value = _clean(text).lower()
     value_no_pct = _clean(_PERCENT_RE.sub("", value))
     return value in _EQUITY_SECTORS or value_no_pct in _EQUITY_SECTORS
 
 
-def _is_stop_line(text: str) -> bool:
+def _is_stop_line(text):
     return bool(
         re.match(
             r"^(?:Grand Total|Company/Issuer|Instrument/Issuer|Top Ten Holdings|"
@@ -392,12 +395,6 @@ def _is_stop_line(text: str) -> bool:
 
 
 def _parse_equity_column(lines, initial_sector=""):
-    """Parse one physical equity portfolio column.
-
-    Returns (holdings, last_sector).  The last sector is important because
-    Abakkus sometimes puts a sector subtotal at the bottom of the left
-    column and the corresponding issuer(s) at the top of the right column.
-    """
     holdings = []
     current_sector = initial_sector
     i = 0
@@ -408,8 +405,6 @@ def _parse_equity_column(lines, initial_sector=""):
             i += 1
             continue
 
-        # Header continuation words can appear inside the table column
-        # because the two-line PDF header is vertically staggered.
         if text.lower() in {
             "assets",
             "net",
@@ -424,18 +419,16 @@ def _parse_equity_column(lines, initial_sector=""):
         if _is_stop_line(text):
             break
 
-        if re.fullmatch(r"[•●▪◦]+", text):
+        if re.fullmatch(r"[•●▪◦]+", text):
             i += 1
             continue
 
-        # Direct sector subtotal.
         pct_match = re.fullmatch(r"(.+?)\s+(-?\d+(?:\.\d+)?)\s*%", text)
         if pct_match and _is_equity_sector(pct_match.group(1)):
             current_sector = _clean(pct_match.group(1))
             i += 1
             continue
 
-        # Normal one-line issuer.
         if re.search(r"-?\d+(?:\.\d+)?\s*%\s*$", text):
             match = re.match(r"^(.*?)\s+(-?\d+(?:\.\d+)?)\s*%\s*$", text)
             company, pct = _clean(match.group(1)), match.group(2)
@@ -450,10 +443,6 @@ def _parse_equity_column(lines, initial_sector=""):
             i += 1
             continue
 
-        # Wrapped row. This can be either a wrapped sector subtotal or a
-        # wrapped company name. Example sector:
-        #   Agricultural, Commercial & Construction
-        #   Vehicles 3.00%
         combined = text
         found = False
         for j in range(i + 1, min(i + 5, len(lines))):
@@ -509,7 +498,6 @@ def _dedupe_holdings(holdings):
 
 
 def _parse_debt_lines(lines):
-    """Parse the single-column liquid-fund issuer/rating table."""
     holdings = []
     i = 0
 
@@ -522,7 +510,6 @@ def _parse_debt_lines(lines):
         if _is_stop_line(text):
             break
 
-        # Header itself.
         if re.search(
             r"(?:Instrument/Issuer\s+Name|Company/?Issuer).*%\s*of\s*Net\s*Assets",
             text,
@@ -531,14 +518,11 @@ def _parse_debt_lines(lines):
             i += 1
             continue
 
-        # Category subtotal.
         m = re.fullmatch(r"(.+?)\s+(-?\d+(?:\.\d+)?)\s*%", text)
         if m and _clean(m.group(1)).lower() in _DEBT_CATEGORIES:
-            _clean(m.group(1))
             i += 1
             continue
 
-        # Issuer + rating + pct, potentially wrapped over several lines.
         combined = text
         found = False
         for j in range(i, min(i + 5, len(lines))):
@@ -557,7 +541,15 @@ def _parse_debt_lines(lines):
                 company = _clean(match.group(1))
                 rating = _clean(match.group(2))
                 pct = match.group(3)
-                if company and company.lower() not in _DEBT_CATEGORIES:
+                # A row that carries a rating/Sovereign tag is always an
+                # actual holding, never a category subtotal (subtotals are
+                # just "<category name> <pct>", no rating). Generic/unnamed
+                # instruments like "Government Securities" or "Cash & Cash
+                # Equivalents" can legitimately be the issuer name here, and
+                # happen to also appear in _DEBT_CATEGORIES, so that set
+                # must NOT be used to filter rows that already matched the
+                # issuer+rating+pct pattern.
+                if company:
                     holdings.append(
                         {"company": company, "sector": rating, "pct_to_net_assets": pct}
                     )
@@ -572,12 +564,6 @@ def _parse_debt_lines(lines):
 
 
 def extract_holdings(page):
-    """
-    Extract Abakkus portfolio holdings using the actual table geometry.
-
-    Equity pages have two side-by-side Company/% tables; both are parsed.
-    Liquid pages have one Instrument/Issuer table and are parsed separately.
-    """
     equity_ranges = _find_equity_table_ranges(page)
     if equity_ranges:
         holdings = []
@@ -597,18 +583,12 @@ def extract_holdings(page):
     return []
 
 
-# ---------------------------------------------------------------------------
-# Scheme extraction
-# ---------------------------------------------------------------------------
-
-
-def _scheme_is_performance_page(text: str) -> bool:
+def _scheme_is_performance_page(text):
     t = _clean(text).lower()
     return "fund performance as on" in t[:400]
 
 
-def extract_scheme_fields(pdf, page_idxs: list[int]) -> dict:
-    """Entry point expected by the main AMC extractor."""
+def extract_scheme_fields(pdf, page_idxs):
     if not page_idxs:
         return {
             "benchmark": None,
@@ -632,9 +612,6 @@ def extract_scheme_fields(pdf, page_idxs: list[int]) -> dict:
         if _scheme_is_performance_page(text):
             continue
 
-        # Portfolio page contains the clean Fund Features metadata in the
-        # left column.  Extract metadata from words left of the portfolio
-        # table, so right-hand holdings cannot contaminate it.
         headers = _find_portfolio_headers(page)
         metadata_text = text
         if headers:
@@ -661,7 +638,6 @@ def extract_scheme_fields(pdf, page_idxs: list[int]) -> dict:
             if holding not in holdings:
                 holdings.append(holding)
 
-        # Only take an explicitly labelled additional benchmark from metadata.
         if additional_benchmark is None:
             additional_benchmark = extract_additional_benchmark(metadata_text)
 

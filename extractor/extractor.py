@@ -9,7 +9,8 @@ your scraper's download_factsheet(), just no download step:
 from .amc import get_extractor
 from .pdf_reader import open_pdf
 from .schema import FundManager, Holding, SchemeRecord
-from .segmenter import segment_schemes
+
+# from .segmenter import segment_schemes
 
 
 def extract_factsheet_data(
@@ -20,7 +21,7 @@ def extract_factsheet_data(
     print(f"extractor module : {extractor_module}")
 
     with open_pdf(pdf_path) as pdf:
-        scheme_pages = segment_schemes(pdf)
+        scheme_pages = extractor_module.segment_schemes(pdf)
 
         for scheme_name, page_idxs in scheme_pages.items():
             if not page_idxs:
@@ -29,7 +30,7 @@ def extract_factsheet_data(
 
             record = SchemeRecord(
                 amc_name=amc_name,
-                scheme_name=scheme_name.title(),
+                scheme_name=scheme_name,
                 factsheet_month=factsheet_month,
                 benchmark=fields["benchmark"],
                 additional_benchmark=fields.get("additional_benchmark"),

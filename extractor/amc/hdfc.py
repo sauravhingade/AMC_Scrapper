@@ -1,126 +1,6 @@
-"""
-HDFC Mutual Fund extractor.
-
-Layout looks superficially like 360 ONE's (narrow left sidebar + wide
-holdings table) but every label format is different, so none of 360 ONE's
-regexes match here. Tested against both HDFC MF's June 2026 factsheet (140
-pages, ~48 real schemes) and the separate HDFC MF Index Solutions June 2026
-factsheet (~50 index-fund/ETF schemes) -- 96/98 schemes come back with fully
-clean benchmark + fund manager data; holdings extraction is new in this
-revision (see section 3 below) and correctly populated on every scheme
-tested, at roughly 90%+ per-row accuracy on dense equity holdings tables.
-
-Known layout quirks (found via testing, not guessed):
-
-1. Sidebar column width: HDFC's sidebar text wraps close enough to a 152pt
-   (360 ONE's) or even 165pt boundary that within_bbox() clips words
-   mid-character right at the edge -- e.g. "(TRI)" becomes "(TRI". Widening
-   to 180pt gives enough clearance that this stopped happening across every
-   tested page. Do NOT widen further without re-testing: at 200pt the crop
-   starts pulling in the holdings table's letter-spaced justified-text
-   headers, which corrupts fund-manager name extraction in a different way
-   (see point 2).
-
-2. Some sidebar text on some pages is rendered with wide letter-spacing --
-   single characters extracted as separate "words" ("B E N C H MARK" instead
-   of "BENCHMARK", or "years" split into "ye"/"a"/"r"/"s"). Widening the
-   crop doesn't fix this (tested) and neither does raising x_tolerance on
-   pdfplumber's extract_words (tested -- doesn't bridge the gaps here, see
-   point 3 for why). The fix used throughout this module: filter out any
-   fund-manager-name token that doesn't start with an uppercase letter --
-   real names are always capitalized, so this cleanly drops "ye"/"a"/"rs"-
-   style debris without needing to repair the underlying tokenization.
-
-3. Root cause of point 2, found while building holdings extraction: on
-   these pages pdfplumber's extract_words() sometimes splits a normal word
-   into single-character tokens even though the underlying character
-   stream has near-zero gaps between letters (confirmed via page.chars --
-   e.g. "State Bank of India" has consecutive characters 0.0-0.1pt apart,
-   which should never split). This looks like a pdfplumber word-boundary
-   quirk specific to how this AMC's PDF generator emits per-character
-   positioning for justified-fill table text, not an actual spacing issue
-   in the document. It does NOT happen in ordinary paragraph text on the
-   same pages (investment objective, disclaimers, etc. all extract fine) --
-   only inside the PORTFOLIO table region. Section 3 below works around it
-   entirely by reconstructing words directly from page.chars instead of
-   trusting extract_words() in that region.
-
-4. No colon after "#BENCHMARK INDEX" / "##ADDL. BENCHMARK INDEX" -- label
-   and value are on separate lines. The "#"/"##" are footnote markers, not
-   decoration to strip -- they're part of how the two benchmark fields are
-   told apart. Index/ETF factsheets follow the benchmark value with a
-   "TRACKING ERROR" block instead of "EXIT LOAD" (which the original
-   version of this module didn't account for, so it leaked whole paragraphs
-   of tracking-error/lock-in-period boilerplate into additional_benchmark
-   on ~40 schemes) -- both are now recognized as section boundaries, along
-   with "NET EQUITY EXPOSURE", "Debt Index Replication Factor", and
-   "Scrip Code" (ETF pages put the NSE/BSE scrip code directly after the
-   benchmark block).
-
-5. Fund manager info is a real "Name / Since / Total Exp" table, not
-   inline "Fund Manager: Mr. X" text, rendered two different ways depending
-   on whether the scheme has per-sleeve managers:
-   - Hybrid/multi-asset schemes tag each manager with "(Equity Portfolio)"
-     / "(Debt Assets)" etc. -- handled by accumulating name tokens per line
-     until a sleeve tag is hit, same technique as 360 ONE's version. (Fixed
-     in this revision: the sleeve regex didn't allow a trailing space before
-     the closing paren -- "(Equity Assets )" -- which some pages use, and
-     silently merged that manager's name into the next one's.)
-   - Plain multi-manager schemes (most debt funds, all index funds/ETFs)
-     have NO sleeve tags at all -- e.g. "Arun Agarwal" / "Nandita Menezes"
-     as two separate co-managers with nothing to delimit them. The old
-     version of this module had no way to split these and merged every
-     co-manager on the page into one garbled name. Fixed with a second
-     algorithm (used only when no sleeve tag appears anywhere in the
-     block): each line's noise-stripped residual is either a complete
-     2+-word name (closes out immediately) or a lone word that's part of a
-     name wrapped across two lines (buffered until 2 words accumulate,
-     e.g. "Srinivasan" + "Ramamurthy").
-
-TODO -- KNOWN REMAINING GAP: schemes where a manager's name is followed by a
-free-text role description in parentheses that doesn't end in "Portfolio"/
-"Assets" (e.g. "Bhagyesh Kagalkar (Dedicated Fund Manager for commodities
-related investments viz. Gold)") aren't a recognized sleeve tag, so the
-accumulator doesn't know to close there. Affects 2 of 98 tested schemes.
-Left as-is rather than special-cased for one AMC's one phrasing -- if this
-shows up more broadly, generalize the sleeve regex to close on ANY
-parenthetical, not just Portfolio/Assets ones.
-
-3. HOLDINGS EXTRACTION (new in this revision):
-
-HDFC lays holdings out as two side-by-side sub-tables per page, and (see
-point 3 above) the text inside that region doesn't reconstruct correctly
-via pdfplumber's extract_words(). Both problems are worked around here:
-
-- Words are built directly from page.chars (see _words_from_chars) rather
-  than using extract_words(), splitting only on real space characters and
-  large horizontal gaps -- sidesteps the extract_words() quirk entirely.
-- The two sub-tables are located dynamically per page by finding each
-  "Company"/"Instrument" header that has a matching "Industry"/"Rating"
-  header on the same row (plain substring matching on "Company" alone
-  false-matched real holdings like "SBI Life Insurance Company Ltd." on an
-  earlier attempt -- requiring a same-row Industry/Rating header fixes
-  that).
-- Each sub-table is walked as a small state machine (_rows_to_holdings)
-  handling the two ways a holding can be malformed if read naively:
-  category-divider rows ("EQUITY & EQUITY RELATED", "Sub Total") that
-  share the same column shape as a real holding, and company names that
-  wrap across 2+ lines with the sector/rating text starting only on the
-  wrap line.
-- Not perfect: dense equity pages come back around 90%+ correct per-row
-  (some long company names that wrap AND whose sector also starts wrapping
-  produce a truncated company field, e.g. "Ltd." on its own). Rather than
-  let those slip through silently, extract_holdings drops any holding
-  whose company field is just a bare corporate suffix (see
-  _SUSPICIOUS_COMPANY) -- prefers dropping a row to keeping a visibly
-  wrong one. Arbitrage-fund schemes (which show both a cash leg and a
-  matching derivative/future leg per stock, i.e. a 4-value-per-row layout)
-  aren't specifically handled and may show one leg's percentage against
-  the other leg's row -- not yet tested rigorously, flag for follow-up.
-"""
-
 import re
-from ..pdf_reader import get_column_text
+
+# from ..pdf_reader import get_column_text
 
 SIDEBAR_WIDTH = 180
 
@@ -139,6 +19,46 @@ _GARBAGE_MARKERS = [
     "Debt Index Replication Factor",
     "Scrip Code",
 ]
+
+
+def reconstruct_lines(words, y_tolerance: float = 1.5) -> str:
+    """Group words into lines by y-position, sort each line left-to-right.
+
+    y_tolerance was originally 3.0, which merges lines whose baselines sit
+    within 3pt of each other. Found via testing: a name that wraps to a new
+    line (e.g. "Mehta") can land within 3pt of a small sleeve-role tag
+    ("Equity"/"Debt") positioned elsewhere on the page, causing the two to
+    merge into one reconstructed line with WRONG x-order -- the tag (further
+    left) sorts before the wrapped name, corrupting extraction. 1.5pt keeps
+    genuinely-same-line words together while separating near-miss cases like
+    this one.
+    """
+    lines = {}
+    for w in words:
+        y = round(w["top"] / y_tolerance) * y_tolerance
+        lines.setdefault(y, []).append(w)
+    return "\n".join(
+        " ".join(w["text"] for w in sorted(lines[y], key=lambda w: w["x0"]))
+        for y in sorted(lines)
+    )
+
+
+def get_column_text(page, x0: float, x1: float) -> str:
+    """Extract clean text from a vertical column slice of a page, by
+    physically cropping the page to the bbox first.
+
+    GOTCHA (found via testing against an HDFC factsheet, doesn't show up on
+    360 ONE's layout): page.within_bbox() clips glyphs AT the boundary --
+    if a word straddles x1 (e.g. "(TRI)" starting inside the column but
+    ending just past it), the clip cuts the word mid-character ("(TRI)"
+    becomes "(TRI"), silently corrupting the value. This function is kept
+    as-is (360 ONE's sidebar has a clean gap at its boundary, so it never
+    hits this), but any AMC whose columns wrap text right up against the
+    crop line should use get_column_text_by_start() instead.
+    """
+    cropped = page.within_bbox((x0, 0, x1, page.height))
+    words = cropped.extract_words()
+    return reconstruct_lines(words)
 
 
 def _trim_garbage(value: str) -> str:

@@ -17,7 +17,15 @@ discipline the old AMC_LAYOUTS config comment already called for. Copy
 whichever existing module's layout looks closest as a starting point.
 """
 
-from . import abakkus, aditya_birla, hdfc, three_sixty_one
+from . import (
+    abakkus,
+    aditya_birla,
+    angel_one,
+    axis,
+    bajaj_finserv,
+    hdfc,
+    three_sixty_one,
+)
 
 REGISTRY = [
     ("360 ONE Mutual Fund", three_sixty_one),
@@ -28,6 +36,10 @@ REGISTRY = [
     ("Abakkus", abakkus),
     ("Aditya Birla", aditya_birla),
     ("Aditya", aditya_birla),
+    ("Angel one", angel_one),
+    ("Angel", angel_one),
+    ("Axis", axis),
+    ("bajaj finserv", bajaj_finserv),
 ]
 
 # Fallback for any AMC without its own module yet. Deliberately NOT silent:

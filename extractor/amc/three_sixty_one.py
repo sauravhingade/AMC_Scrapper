@@ -13,8 +13,7 @@ import re
 
 import pdfplumber
 
-from ..config import HOLDINGS_CATEGORY_LABELS, HEADING_EXCLUDE, SCHEME_KEYWORDS
-
+from ..config import HEADING_EXCLUDE, HOLDINGS_CATEGORY_LABELS, SCHEME_KEYWORDS
 
 BODY_MARKERS = re.compile(
     r"Portfolio as on|Fund Manager|Benchmark Index|BENCHMARK|NAV as on|Scheme Performance",
@@ -45,7 +44,7 @@ def segment_schemes(pdf) -> dict[str, list[int]]:
             current = first_line
             scheme_pages.setdefault(current, [])
 
-        if current and BODY_MARKERS.search(text):
+        if current and BODY_MARKERS.search(text):  # noqa: SIM102
             if i not in scheme_pages[current]:
                 scheme_pages[current].append(i)
 

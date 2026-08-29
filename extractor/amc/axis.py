@@ -323,7 +323,7 @@ def _passive_extract_scheme_fields(pdf, page_idxs: list[int]) -> dict:
             if manager not in managers:
                 managers.append(manager)
         for holding in _passive_extract_holdings(page):
-            holdings.append(holding)
+            holdings.append(holding)  # noqa: PERF402
     return {
         "benchmark": benchmark,
         "additional_benchmark": additional_benchmark,
@@ -753,7 +753,7 @@ def _active_split_name_sector(
             trailing_pct_count += 1
         else:
             break
-    pct_words_to_drop = set(
+    pct_words_to_drop = set(  # noqa: C401
         id(w) for w in pct_line_words[len(pct_line_words) - trailing_pct_count :]
     )
     non_pct = [w for w in words if id(w) not in pct_words_to_drop]
@@ -877,7 +877,7 @@ def _active_extract_scheme_fields(pdf, page_idxs: list[int]) -> dict:
             if manager not in managers:
                 managers.append(manager)
         for holding in _active_extract_holdings(page):
-            holdings.append(holding)
+            holdings.append(holding)  # noqa: PERF402
     return {
         "benchmark": benchmark,
         "additional_benchmark": additional_benchmark,

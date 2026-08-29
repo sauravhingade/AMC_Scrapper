@@ -25,6 +25,14 @@ from . import (
     bajaj_finserv,
     hdfc,
     three_sixty_one,
+    bandhan,
+    bank_of_india,
+    canara_robeco,
+    baroda_bnp_paribas,
+    capitalmind,
+    choice,
+    edelweiss,
+    dsp,
 )
 
 REGISTRY = [
@@ -40,6 +48,14 @@ REGISTRY = [
     ("Angel", angel_one),
     ("Axis", axis),
     ("bajaj finserv", bajaj_finserv),
+    ("Bandhan", bandhan),
+    ("Bank of india", bank_of_india),
+    ("Canara Robeco", canara_robeco),
+    ("Baroda BNP", baroda_bnp_paribas),
+    ("Capitalmind", capitalmind),
+    ("choice", choice),
+    ("Edelweiss", edelweiss),
+    ("DSP", dsp),
 ]
 
 # Fallback for any AMC without its own module yet. Deliberately NOT silent:

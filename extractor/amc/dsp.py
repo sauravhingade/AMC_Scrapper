@@ -155,14 +155,15 @@ def _clean_scheme_name(line, next_line=None):
     if next_line and name.count("(") > name.count(")"):
         # a long "(Erstwhile ...)" suffix occasionally wraps onto a
         # second line (e.g. "DSP Aggressive Hybrid Fund (Erstwhile DSP
-        # Equity &" / "Bond Fund)") -- pull in the closing fragment so
-        # the parenthetical, and therefore the scheme name, is whole.
+        # Equity &" / "Bond Fund)", or "DSP Income Plus Arbitrage Omni
+        # FoF (Erstwhile known as" / "DSP Income Plus Arbitrage Fund
+        # of Fund)") -- pull in the closing fragment so the
+        # parenthetical, and therefore the scheme name, is whole. The
+        # unbalanced-paren trigger is specific enough that the
+        # continuation line is safe to merge even when, as in the
+        # second example, it happens to start with "DSP" too.
         candidate = _strip_trailing_footnote_symbols(next_line.strip())
-        if (
-            candidate
-            and len(candidate) <= 40
-            and not candidate.upper().startswith("DSP")
-        ):
+        if candidate and len(candidate) <= 60 and ")" in candidate:
             name = f"{name} {candidate}"
     return _clean(name)
 
@@ -347,6 +348,40 @@ def _find_grand_total(page):
     return None
 
 
+# Word pairs that mark the start of a footnote-level disclosure table
+# with a *different* column layout than the main "Name of Instrument
+# ... % to Net Assets" portfolio table -- these appear below a
+# scheme's real holdings (an "Interim Distribution cum Capital
+# Withdrawal" detail table for restructured/defaulted securities, an
+# "Additional Disclosure" section restating an underlying fund's own
+# look-through holdings on a fund-of-funds page, etc). A column whose
+# real content ends earlier than GRAND TOTAL's row (GRAND TOTAL isn't
+# always in every band -- see _compute_table_regions) would otherwise
+# keep capturing all the way to the page bottom and sweep this in.
+_OTHER_STOP_MARKERS = (
+    ("Security", "Name"),
+    ("Additional", "Disclosure"),
+)
+
+
+def _find_stop_markers(page):
+    """Return every (top, x0) position on the page that marks the start
+    of non-holdings content, for capping each table region's bottom
+    independently of which band GRAND TOTAL happens to land in."""
+    words = _page_words(page)
+    markers = []
+    gt = _find_grand_total(page)
+    if gt:
+        markers.append(gt)
+    for i, w in enumerate(words):
+        for phrase in _OTHER_STOP_MARKERS:
+            if w["text"] != phrase[0]:
+                continue
+            if i + 1 < len(words) and words[i + 1]["text"] == phrase[1]:
+                markers.append((float(w["top"]), float(w["x0"])))
+    return markers
+
+
 def _compute_table_regions(page, grand_total_pos=None):
     """Return a list of table regions in reading order (band left to
     right, top to bottom within each band), each carrying a right_edge
@@ -361,9 +396,10 @@ def _compute_table_regions(page, grand_total_pos=None):
     That refinement happens per-region in `_rows_for_region`; here we
     only need the coarse band-to-band boundary.
 
-    bottom bound: GRAND TOTAL caps whichever band's x-range it falls
-    into (that band's content genuinely ends there); every other band
-    -- and every non-last stacked header within the GRAND-TOTAL band
+    bottom bound: each of GRAND TOTAL and the other stop markers caps
+    whichever band's x-range it falls into (that band's content
+    genuinely ends there); a band with no stop marker of its own --
+    and every non-last stacked header within a band that does have one
     -- is bounded by the next header below it, or by the page bottom.
     """
     instances = _find_header_instances(page)
@@ -373,6 +409,9 @@ def _compute_table_regions(page, grand_total_pos=None):
 
     band_name_x0 = [min(x["name_x0"] for x in band) for band in bands]
     band_nav_x1 = [max(x["nav_x1"] for x in band) for band in bands]
+    stop_markers = _find_stop_markers(page)
+    if grand_total_pos is not None and grand_total_pos not in stop_markers:
+        stop_markers.append(grand_total_pos)
 
     regions = []
     for bi, band in enumerate(bands):
@@ -382,12 +421,19 @@ def _compute_table_regions(page, grand_total_pos=None):
         else:
             right_edge = band_nav_x1[bi] + 30
 
-        band_bottom = page.height - 12
-        if grand_total_pos is not None:
-            gt_top, gt_x0 = grand_total_pos
-            left_bound = band_name_x0[bi] - 15
-            if left_bound <= gt_x0 < right_edge:
-                band_bottom = gt_top - 0.5
+        left_bound = band_name_x0[bi] - 15
+        # Use a tighter boundary than `right_edge` when attributing
+        # stop markers to a band -- `right_edge` intentionally has
+        # some slack for the data column itself (real values are
+        # right-aligned and can run a little wider than the header
+        # text), but that same slack can otherwise sweep in an
+        # unrelated heading/footnote sitting just past the true
+        # column (e.g. a panel note title one band over).
+        stop_right_edge = min(right_edge, band_nav_x1[bi] + 16)
+        in_band_stops = [
+            top for top, x0 in stop_markers if left_bound <= x0 < stop_right_edge
+        ]
+        band_bottom = min(in_band_stops) - 0.5 if in_band_stops else page.height - 12
 
         for ii, h in enumerate(band):
             bottom = band[ii + 1]["top"] if ii + 1 < len(band) else band_bottom
@@ -578,7 +624,21 @@ def _extract_addl_benchmark_from_line(line):
     growth_matches = list(_GROWTH_PHRASE_RE.finditer(prefix))
     start = growth_matches[-1].end() if growth_matches else 0
     name = _strip_trailing_footnote_symbols(_clean(prefix[start:] + m.group(1)))
-    return name or None
+    if not name or not _looks_like_benchmark_name(name):
+        # Some tables (e.g. an ETF/index fund's Tracking Difference
+        # variant) wrap the header across more physical lines than
+        # this reconstructs cleanly -- rather than risk propagating a
+        # garbled value (leftover 'Period'/'Growth of Rs'/'10,000'
+        # fragments), skip it; extract_scheme_fields already returns
+        # None gracefully when no clean match is found.
+        return None
+    return name
+
+
+def _looks_like_benchmark_name(name):
+    if re.search(r"\bPeriod\b|\bGrowth\b|\d,\d", name, re.IGNORECASE):
+        return False
+    return len(name.split()) <= 8
 
 
 def _is_heading_candidate(line):
@@ -677,8 +737,6 @@ _ASSET_CLASS_PREFIXES = sorted(
         "LISTED / AWAITING LISTING ON THE STOCK EXCHANGES",
         "LISTED/AWAITING LISTING ON THE STOCK EXCHANGES",
         "UNLISTED",
-        "ALTERNATIVE INVESTMENT FUNDS (AIF)",
-        "ALTERNATIVE INVESTMENT FUND",
         "PREFERENCE SHARES",
         "PREFERENCE SHARE",
         "EXCHANGE TRADED FUNDS",
@@ -733,6 +791,113 @@ _CASH_LEAF_LABELS = {
 
 _TOTAL_RE = re.compile(r"^(grand\s+)?total$", re.IGNORECASE)
 
+# The standard NSE/AMFI industry-classification labels used across
+# virtually every Indian equity-scheme factsheet (a published,
+# regulator-recognised taxonomy, not scheme-specific vocabulary). Font
+# weight is our primary signal for telling a sector-header row apart
+# from an ordinary holding, but DSP's own PDF generation is
+# occasionally inconsistent about which rows actually render bold --
+# on some pages a real sector header prints in the *regular* weight,
+# and on others an ordinary holding prints *bold* by mistake. Matching
+# against this fixed vocabulary (combined with _COMPANY_SUFFIX_RE
+# below) lets the classifier recover the right answer in both
+# directions regardless of what the font says.
+_KNOWN_SECTOR_NAMES = {
+    "AEROSPACE & DEFENSE",
+    "AGRICULTURAL FOOD & OTHER PRODUCTS",
+    "AGRICULTURAL, COMMERCIAL & CONSTRUCTION VEHICLES",
+    "AIRLINES",
+    "AUTO COMPONENTS",
+    "AUTOMOBILES",
+    "BANKS",
+    "BEVERAGES",
+    "CAPITAL MARKETS",
+    "CEMENT & CEMENT PRODUCTS",
+    "CHEMICALS & PETROCHEMICALS",
+    "CIGARETTES & TOBACCO PRODUCTS",
+    "COMMERCIAL SERVICES & SUPPLIES",
+    "CONSTRUCTION",
+    "CONSUMABLE FUELS",
+    "CONSUMER DURABLES",
+    "DIVERSIFIED",
+    "DIVERSIFIED FMCG",
+    "DIVERSIFIED METALS",
+    "ELECTRICAL EQUIPMENT",
+    "ENTERTAINMENT",
+    "FERROUS METALS",
+    "FERTILIZERS & AGROCHEMICALS",
+    "FINANCE",
+    "FINANCIAL TECHNOLOGY (FINTECH)",
+    "FOOD PRODUCTS",
+    "GAS",
+    "HEALTHCARE EQUIPMENT & SUPPLIES",
+    "HEALTHCARE SERVICES",
+    "HOTELS, RESTAURANTS & TOURISM",
+    "HOUSEHOLD PRODUCTS",
+    "IT - HARDWARE",
+    "IT - SERVICES",
+    "IT - SOFTWARE",
+    "INDUSTRIAL MANUFACTURING",
+    "INDUSTRIAL PRODUCTS",
+    "INSURANCE",
+    "LEISURE SERVICES",
+    "MEDICAL EQUIPMENT & SUPPLIES",
+    "METALS & MINERALS TRADING",
+    "MINERALS & MINING",
+    "NON - FERROUS METALS",
+    "NON-FERROUS METALS",
+    "OIL",
+    "OTHER CONSUMER SERVICES",
+    "PAPER, FOREST & JUTE PRODUCTS",
+    "PERSONAL PRODUCTS",
+    "PETROLEUM PRODUCTS",
+    "PHARMACEUTICALS & BIOTECHNOLOGY",
+    "PORTS",
+    "POWER",
+    "PRINT MEDIA",
+    "REALTY",
+    "RETAILING",
+    "TELECOM - EQUIPMENT & ACCESSORIES",
+    "TELECOM - SERVICES",
+    "TEXTILES & APPARELS",
+    "TRANSPORT INFRASTRUCTURE",
+    "TRANSPORT SERVICES",
+}
+
+# Real instrument names -- Indian or foreign -- almost always end in a
+# corporate/legal-entity suffix; GICS/NSE-style industry-group labels
+# ("Banks", "IT - Software", "Electrical Equipment") never do. This is
+# the same fallback technique amc/canara_robeco.py uses
+# (_COMPANY_SUFFIX_RE there) for exactly the same reason, extended
+# here to also cover the foreign-listed names that show up in DSP's
+# overseas-allocation sleeves (ETFs, ADRs, "Inc"/"Corp"/"SE"/"Group"
+# style suffixes) and the DSP-managed-fund units held as cash
+# equivalents ("DSP Short Term Fund").
+_COMPANY_SUFFIX_RE = re.compile(
+    r"\b(?:Ltd\.?|Limited|Inc\.?|Corp\.?|Corporation|PLC|LLP|Co\.?|Company|"
+    r"Bank|Trust|Fund|ETF|Group|Holdings?|SE|AG|NV|SA|ADR|NPV|Ord|"
+    r"Bhd|Berhad|Oyj|SpA|Kabushiki Kaisha|KK)$",
+    re.IGNORECASE,
+)
+
+
+def _looks_like_holding(company, rating, is_cash_leaf):
+    """True if the row's own text/rating shape strongly indicates an
+    individual instrument rather than a bucket/sector header,
+    regardless of what the font says."""
+    if is_cash_leaf or rating:
+        return True
+    if _COMPANY_SUFFIX_RE.search(company):
+        return True
+    # a coupon-rate-prefixed debt security, e.g. '7.24% GOI 2055'
+    if re.match(r"^-?\d+(\.\d+)?%\s", company):
+        return True
+    return False
+
+
+def _looks_like_sector_header(company):
+    return company.upper() in _KNOWN_SECTOR_NAMES
+
 
 def _strip_asset_class_prefixes(text):
     """Repeatedly strip known generic asset-class/sub-bucket labels off
@@ -749,6 +914,22 @@ def _strip_asset_class_prefixes(text):
                 changed = True
                 break
     return stripped
+
+
+def _looks_like_prose(text):
+    """A generic, content-based safety net against footnote/disclosure
+    text (benchmark-change notices, distribution-policy notes, etc.)
+    that happens to sit in the same x-range as a table column below
+    the column's real content -- this can slip past the GRAND
+    TOTAL/other stop markers when it contains a coincidental '%' token
+    that lands in the anchor column purely by line-wrap chance. Real
+    instrument/sector names in this factsheet top out around 10 words
+    (e.g. 'Global X Funds - Global X Genomics & Biotechnology ETF');
+    ordinary prose sentences run much longer, so a generous word-count
+    ceiling catches this without needing to know the footnote's
+    specific wording."""
+    words = text.split()
+    return len(words) > 13 or len(text) > 95
 
 
 def _rows_for_region(page, region):
@@ -862,10 +1043,13 @@ def _rows_for_region(page, region):
         ordered_lines = [lines[k] for k in sorted(lines)]
 
         for line in ordered_lines[:-1]:
+            text = _strip_trailing_footnote_symbols(_join(line))
+            if _looks_like_prose(text):
+                continue
             rows.append(
                 {
                     "top": float(line[0]["top"]),
-                    "company": _strip_trailing_footnote_symbols(_join(line)),
+                    "company": text,
                     "rating": "",
                     "pct": "",
                     "bold": True,
@@ -884,15 +1068,23 @@ def _rows_for_region(page, region):
             # stray footnote-marker glyph, not a negligible-value
             # holding row -- discard it.
             continue
+        if _looks_like_prose(company):
+            # footnote/disclosure prose that coincidentally contained
+            # a '%' token landing in this column -- not a holding.
+            continue
         stripped = _strip_asset_class_prefixes(company)
         if stripped:
             company = stripped
+
+        rating = _join(rating_words)
+        if _looks_like_prose(rating):
+            rating = ""
 
         rows.append(
             {
                 "top": float(anchor["top"]),
                 "company": company,
-                "rating": _join(rating_words),
+                "rating": rating,
                 "pct": anchor["text"],
                 "bold": bold,
             }
@@ -901,12 +1093,42 @@ def _rows_for_region(page, region):
     return rows
 
 
-def _classify_region_rows(rows):
+def _pct_value(pct_text):
+    try:
+        return float(pct_text.replace("<", "").rstrip("%"))
+    except (ValueError, AttributeError):
+        return None
+
+
+def _classify_region_rows(rows, state):
     """Walk one table region's rows in document order, tracking the
     most recently seen sector/bucket header, and emit only the actual
-    holdings."""
+    holdings.
+
+    `state["current_industry"]` is shared and carried across every
+    region on a page, in reading order (left-to-right bands,
+    top-to-bottom within a band) -- the same equity sector listing can
+    genuinely keep running from the bottom of one newspaper-style
+    column into the top of the next with no repeated header (DSP
+    simply doesn't restate it), so resetting this per-region would
+    blank out the sector for whichever holding happens to land first
+    in the new column. This is safe now that a header row is
+    identified by its own text shape (company-suffix / known-sector-
+    name check) rather than by font weight alone, so a company that
+    unexpectedly leaked into a bucket-header row is caught by that
+    same check before it can ever reach current_industry.
+
+    The reconciliation bookkeeping (section_sum/section_label/
+    section_holding_count -- see the 'Total' handling below), by
+    contrast, is deliberately reset for every region: a 'Total' row
+    that happens to be the very first thing in a new column belongs to
+    whatever content is directly above it there, not to an unrelated
+    bucket left over from a completely different column.
+    """
     holdings = []
-    current_industry = ""
+    state["section_label"] = ""
+    state["section_sum"] = 0.0
+    state["section_holding_count"] = 0
     for i, row in enumerate(rows):
         company = row["company"]
         if not company:
@@ -925,6 +1147,41 @@ def _classify_region_rows(rows):
                 # composition). Anything further in this region is
                 # disclosure/footnote content, not real holdings.
                 break
+            # Reconciliation safety net: a bucket's disclosed 'Total'
+            # should equal the sum of its itemised constituents. It
+            # normally does (this is mostly a no-op) -- but derivative
+            # disclosures (e.g. an arbitrage fund's 'Stock Futures'
+            # hedge line, shown at its own mark-to-market value rather
+            # than the underlying cash position's value) can leave a
+            # real, disclosed gap. Rather than silently under-counting
+            # the scheme's holdings, the unexplained remainder is kept
+            # as its own line under the section's own header label, so
+            # NAV coverage stays complete without inventing a company
+            # name for it.
+            total_val = _pct_value(row["pct"])
+            if (
+                total_val is not None
+                and state["section_label"]
+                and not _looks_like_sector_header(state["section_label"])
+            ):
+                # Only reconcile under a non-GICS bucket label (e.g.
+                # 'Arbitrage (Cash Long)', 'MONEY MARKET INSTRUMENTS').
+                # A real GICS sector like 'Insurance' or 'Banks' is
+                # already handled correctly by carrying section_sum
+                # across regions (see docstring above), so a mismatch
+                # there is left alone rather than double-handled.
+                gap = total_val - state["section_sum"]
+                if abs(gap) > 0.5:
+                    gap_pct = f"{gap:.2f}%"
+                    holdings.append(
+                        {
+                            "company": state["section_label"],
+                            "sector": "",
+                            "pct_to_net_assets": gap_pct,
+                        }
+                    )
+            state["section_sum"] = 0.0
+            state["section_holding_count"] = 0
             continue
 
         if row["pct"] == "":
@@ -932,7 +1189,8 @@ def _classify_region_rows(rows):
             # no '%' of its own)
             stripped = _strip_asset_class_prefixes(company)
             if stripped:
-                current_industry = stripped
+                state["current_industry"] = stripped
+                state["section_label"] = stripped
             continue
 
         pct = "<0.01%" if row["pct"] == "*" else row["pct"]
@@ -946,23 +1204,41 @@ def _classify_region_rows(rows):
             # check is text-based and doesn't depend on font weight.
             continue
 
-        if row["bold"] and not is_cash_leaf:
+        # Font weight is the primary bucket-header-vs-holding signal,
+        # but DSP's PDF generation occasionally gets it backwards on
+        # either side (a real sector header prints regular, or a real
+        # holding prints bold) -- when that happens, the row's own
+        # text shape is decisive: a company-suffix/rating match always
+        # wins as a holding, and an exact match against the standard
+        # NSE industry-classification list always wins as a header.
+        is_holding_shaped = _looks_like_holding(company, row["rating"], is_cash_leaf)
+        is_header = (
+            row["bold"] or _looks_like_sector_header(company)
+        ) and not is_holding_shaped
+
+        if is_header and not is_cash_leaf:
             # Peek ahead: is this bold row itself a singleton bucket
             # that's really a holding (e.g. 'TREPS / Reverse Repo
-            # Investments 7.33%'), detected by the next row being a
-            # matching-value 'Total'?
+            # Investments 7.33%', or an arbitrage-fund 'Stock Futures
+            # 9.65%' hedge disclosure with no further constituents
+            # below it), detected either by a following matching-value
+            # 'Total' row, or by this being the very last row in the
+            # region (nothing left for it to be a header *of*)?
             nxt = rows[i + 1] if i + 1 < len(rows) else None
-            if (
-                nxt
-                and nxt["bold"]
-                and _TOTAL_RE.match(nxt["company"])
-                and nxt["pct"] == row["pct"]
-            ):
+            is_singleton = nxt is None or (
+                _TOTAL_RE.match(nxt["company"]) and nxt["pct"] == row["pct"]
+            )
+            if is_singleton:
+                pct_val = _pct_value(pct)
+                if pct_val is not None:
+                    state["section_sum"] += pct_val
+                    state["section_holding_count"] += 1
                 holdings.append(
                     {"company": company, "sector": "", "pct_to_net_assets": pct}
                 )
                 continue
-            current_industry = company
+            state["current_industry"] = company
+            state["section_label"] = company
             continue
 
         if is_cash_leaf:
@@ -977,20 +1253,34 @@ def _classify_region_rows(rows):
             holdings.append(
                 {
                     "company": company,
-                    "sector": current_industry,
+                    "sector": state["current_industry"],
                     "pct_to_net_assets": pct,
                 }
             )
+        pct_val = _pct_value(pct)
+        if pct_val is not None:
+            state["section_sum"] += pct_val
+            state["section_holding_count"] += 1
     return holdings
+
+
+def _new_classify_state():
+    return {
+        "current_industry": "",
+        "section_label": "",
+        "section_sum": 0.0,
+        "section_holding_count": 0,
+    }
 
 
 def extract_holdings(page):
     grand_total_pos = _find_grand_total(page)
     regions = _compute_table_regions(page, grand_total_pos)
     holdings = []
+    state = _new_classify_state()
     for region in regions:
         rows = _rows_for_region(page, region)
-        holdings.extend(_classify_region_rows(rows))
+        holdings.extend(_classify_region_rows(rows, state))
     return holdings
 
 
@@ -1007,6 +1297,7 @@ def extract_scheme_fields(pdf, page_idxs):
     fund_managers = []
     holdings = []
     scheme_name = None
+    classify_state = _new_classify_state()
 
     for pi in page_idxs:
         page = pdf.pages[pi]
@@ -1036,7 +1327,7 @@ def extract_scheme_fields(pdf, page_idxs):
         if regions:
             for region in regions:
                 rows = _rows_for_region(page, region)
-                holdings.extend(_classify_region_rows(rows))
+                holdings.extend(_classify_region_rows(rows, classify_state))
 
     additional_benchmark = None
     if scheme_name:

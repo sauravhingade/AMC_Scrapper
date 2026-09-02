@@ -33,6 +33,9 @@ from . import (
     choice,
     edelweiss,
     dsp,
+    franklin_templeton,
+    helios,
+    groww,
 )
 
 REGISTRY = [
@@ -56,6 +59,9 @@ REGISTRY = [
     ("choice", choice),
     ("Edelweiss", edelweiss),
     ("DSP", dsp),
+    ("Franklin Templeton", franklin_templeton),
+    ("Helios", helios),
+    ("Groww", groww),
 ]
 
 # Fallback for any AMC without its own module yet. Deliberately NOT silent:

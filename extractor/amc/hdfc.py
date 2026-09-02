@@ -32,6 +32,7 @@ annexure/performance pages that happened to start with a HDFC-ish-looking
 line (see segment_schemes docstring).
 """
 
+import collections
 import re
 
 # ---------------------------------------------------------------------------
@@ -381,7 +382,35 @@ def _clean_bench(raw: str | None) -> str | None:
     value = re.sub(r"\s+", " ", raw).strip()
     value = _trim_garbage(value)
     value = _fix_stray_trailing_s(value)
+    value = _balance_trailing_parens(value)
     return value or None
+
+
+def _balance_trailing_parens(text: str) -> str:
+    """Restores a missing closing parenthesis right before a sentence's
+    trailing period, when the count of "(" exceeds ")" in the text.
+
+    Confirmed on HDFC Developed World Overseas Equity Passive FOF's
+    benchmark disclaimer -- "...(Due to time zone difference, benchmark
+    performance will be calculated with a day's lag." -- which is missing
+    its closing ")" before the final period. This isn't an extraction
+    artifact: the character genuinely isn't present in the PDF's text
+    layer at that position at all (confirmed at the char level -- the
+    only ")" glyph anywhere near "lag" belongs to an unrelated, smaller
+    decorative element in a different font sitting nearby, not this
+    sentence), even though the page renders visually as if it were there.
+    Rather than hardcode this one specific sentence, this applies the
+    general, structurally-justified fix of balancing an excess of
+    unclosed "(" by inserting the missing ")" -- safe because a genuinely
+    unbalanced closing paren from a normal, correctly-formed sentence
+    should never occur in this document's benchmark/label text otherwise.
+    """
+    excess = text.count("(") - text.count(")")
+    if excess <= 0:
+        return text
+    if text.endswith("."):
+        return text[:-1].rstrip() + (")" * excess) + "."
+    return text.rstrip() + (")" * excess)
 
 
 def extract_benchmark(sidebar_text: str) -> str | None:
@@ -635,6 +664,19 @@ _CATEGORY_LABELS = {
     "reitinvitinstruments",
     "unitsissuedbyreit",
     "unitsissuedbyreitequityotherequityinstrument",
+    # The REIT/InvIT divider text routinely wraps across THREE separate
+    # physical rows -- "UNITS ISSUED BY REIT" (all caps), then "Units
+    # issued by ReIT" (mixed case, a literal repeat of the same line),
+    # then "(Equity & other Equity Instrument)" on its own row below that
+    # -- rather than appearing as the single already-registered combined
+    # label above. Without this fragment registered on its own, that
+    # third row wasn't recognized as a divider continuation and bled
+    # straight into the FOLLOWING row's company/sector text instead
+    # (confirmed across 14 schemes in the main factsheet: every one with
+    # a REIT holding had its first REIT company name and/or sector
+    # corrupted with "Instrument)" or "(Equity & other Equity" stuck onto
+    # it).
+    "equityotherequityinstrument",
     "unitsissuedbyreitinvit",
     "unitsissuedbyinvit",
     "stockexchange",
@@ -737,6 +779,57 @@ def _fix_stray_trailing_s(text: str) -> str:
     return _STRAY_TRAILING_S_RE.sub("s", text)
 
 
+def _dedupe_repeated_phrase(text: str) -> str:
+    """Collapses a whole phrase that's been rendered TWICE back down to
+    one copy.
+
+    Specific to a handful of debt-fund schemes (confirmed: HDFC Credit
+    Risk Debt Fund) whose portfolio table has an unusual FOUR-column
+    header -- "Instrument | Industry+/Security Rating | Instrument Rating
+    | % to NAV" -- where the middle two columns show the exact same
+    rating value side by side (e.g. "CRISIL - AAA" under both). Both
+    columns fall inside this row-builder's single sector-text collection
+    window (there being no signal in the header to tell it there are
+    really two rating sub-columns, not one), so the value gets
+    concatenated with itself.
+
+    The two copies' individual WORDS can end up interleaved in more than
+    one order depending on exactly how the two columns' x-positions
+    happen to fall relative to each other -- all three confirmed present:
+      - "CRISIL - AAA CRISIL - AAA" (each column's full phrase
+        consecutive: first half of tokens equals the second half);
+      - "Transport Transport Infrastructure Infrastructure" (columns'
+        respective words alternate one-for-one: token[2i] == token[2i+1]
+        for every i);
+      - "CRISIL - CRISIL - AAA(SO) AAA(SO)" (a mixed order matching
+        neither of the above cleanly).
+
+    Rather than enumerate every possible interleaving, this uses one
+    general rule that covers all three (and any other ordering the same
+    root cause might produce): if EVERY distinct token in the string
+    appears in it EXACTLY TWICE, it's collapsed to one copy of each
+    token, kept in first-seen order. This is safe against real,
+    non-duplicated dual-agency ratings like "CRISIL - AAA / ICRA - AAA"
+    (a bond genuinely rated by two different agencies) because those have
+    tokens appearing only ONCE each ("CRISIL", "/", "ICRA" all singular)
+    even though "AAA" and "-" happen to repeat -- the ALL-tokens-exactly-
+    twice condition only ever fires on a true duplicate.
+    """
+    tokens = text.split()
+    if len(tokens) < 2:
+        return text
+    counts = collections.Counter(tokens)
+    if any(n != 2 for n in counts.values()):
+        return text
+    seen: set[str] = set()
+    deduped = []
+    for t in tokens:
+        if t not in seen:
+            seen.add(t)
+            deduped.append(t)
+    return " ".join(deduped)
+
+
 def _label_matches(norm: str, labels: set) -> bool:
     """True if `norm` (an already-_normalize()d row text) IS one of
     `labels`, or is one of them with extra trailing digits stuck on. The
@@ -789,6 +882,7 @@ def _rows_to_holdings(
         company = _strip_footnote_markers(" ".join(company_buf).strip())
         company = _fix_stray_trailing_s(company)
         sector = _fix_stray_trailing_s(" ".join(sector_buf).strip())
+        sector = _dedupe_repeated_phrase(sector)
         normalized = _normalize(company)
         if _label_matches(normalized, _TABLE_END_LABELS):
             stop = True
@@ -861,6 +955,18 @@ def _rows_to_holdings(
         co_text = " ".join(co).strip()
         sec_text = " ".join(sec).strip()
         co_norm = _normalize(co_text)
+        # A multi-line divider phrase (e.g. the REIT/InvIT section's
+        # "Units issued by ReIT (Equity & other Equity Instrument)") can
+        # land with its closing word(s) pushed past sector_start and
+        # counted as "sec" rather than "co" purely because of where that
+        # boundary happens to fall relative to the divider's own text --
+        # confirmed: "... other Equity" (x0 up to 415.3) sits under
+        # sector_start=422.26 while its own closing "Instrument)" (x0
+        # 435.9) doesn't, splitting one continuous divider phrase across
+        # co_text and sec_text on the very same row. Matching co_text
+        # alone against the known divider labels misses this split form
+        # entirely, so the combined "co_text sec_text" is checked too.
+        combined_norm = _normalize(f"{co_text} {sec_text}")
         # A row with a percentage value attached is NEVER a bare
         # asset-class category divider, even when its name text happens to
         # normalize to one -- this matters for single-commodity schemes
@@ -877,10 +983,36 @@ def _rows_to_holdings(
         # specific labels the percentage can't be used to distinguish a
         # divider from a real holding, and they must be skipped
         # regardless of it (_ALWAYS_SKIP_LABELS).
+        #
+        # The REIT/InvIT divider ("Units issued by ReIT (Equity & other
+        # Equity Instrument)") in particular keeps fragmenting at a
+        # DIFFERENT point depending on the specific sub-table's column
+        # widths (which shift scheme-to-scheme whenever an extra hedge/
+        # derivative percentage column is present, shrinking how much of
+        # the divider's tail lands in "sec" before running into pct_start)
+        # -- confirmed truncating after "...other Equity" on one scheme
+        # and after "...Equity Instrument)" was still incomplete on
+        # another. Rather than registering yet another exact fragment
+        # every time a new truncation point turns up, this recognizes
+        # ANY combined text that starts with this divider's own
+        # unmistakable opening ("units issued by re/invit...") as a
+        # divider, no matter how much of its tail got cut off -- no real
+        # holding name could ever coincidentally start with that phrase.
+        is_reit_invit_divider_prefix = combined_norm.startswith(
+            ("unitsissuedbyreit", "unitsissuedbyinvit")
+        )
         is_category_row = (
             bool(co_text)
-            and _label_matches(co_norm, _CATEGORY_LABELS)
-            and (not pct or _label_matches(co_norm, _ALWAYS_SKIP_LABELS))
+            and (
+                _label_matches(co_norm, _CATEGORY_LABELS)
+                or _label_matches(combined_norm, _CATEGORY_LABELS)
+                or is_reit_invit_divider_prefix
+            )
+            and (
+                not pct
+                or _label_matches(co_norm, _ALWAYS_SKIP_LABELS)
+                or _label_matches(combined_norm, _ALWAYS_SKIP_LABELS)
+            )
         )
 
         # "Grand Total" is this table's definitive, unconditional end --

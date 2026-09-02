@@ -658,15 +658,24 @@ def _find_portfolio_headers(page):
         )
         name_x0 = None
         prev_x0 = None
+        label_words = []
         for w in left_candidates:
             x0, x1 = float(w["x0"]), float(w["x1"])
             if prev_x0 is None or (prev_x0 - x1) < 22:
                 name_x0 = x0 if name_x0 is None else min(name_x0, x0)
                 prev_x0 = x0
+                label_words.append(w)
             else:
                 break
         if name_x0 is None:
             continue
+        # The table's own name/type label can sit a handful of pt below the
+        # "%"/"of" pair it was located from (e.g. "InvITs Holdings" on its
+        # own line, with "% of Net Assets" wrapping in underneath it) --
+        # its true lower edge, not just the pct pair's row, is what a
+        # holdings scan must start strictly after, or the label text itself
+        # gets swept in and misread as if it were a genuine category row.
+        label_bottom = max(float(w["top"]) for w in label_words)
 
         rating_x0 = None
         deriv_x0 = None
@@ -684,6 +693,7 @@ def _find_portfolio_headers(page):
                 "rating_x0": rating_x0,
                 "nav_x0": nav_x0,
                 "deriv_x0": deriv_x0,
+                "label_bottom": label_bottom,
             }
         )
 
@@ -771,7 +781,7 @@ def _extract_holdings_for_group(
     column_bound = _stop_bound_for_range(bold_lines, page_height, name_left, right_edge)
     stop_top = header["column_next_top"] if header["column_next_top"] else column_bound
     stop_top = min(stop_top, column_bound)
-    start_top = header["top"] + 6
+    start_top = max(header["top"], header.get("label_bottom", header["top"])) + 4
 
     col_words = [
         w
@@ -865,14 +875,33 @@ def _extract_holdings_for_group(
                     if last_anchor_idx is not None
                     else ""
                 )
-                target = (
-                    last_anchor_idx
-                    if last_anchor_idx is not None
+                prefers_above = (
+                    last_anchor_idx is not None
                     and not _NAME_TERMINAL_RE.search(above_text)
-                    else aidx
                 )
-                target_top = anchor_tops[target]
-                if abs(row_top_of(pending_words) - target_top) <= max_attach:
+                target = last_anchor_idx if prefers_above else aidx
+                pending_top = row_top_of(pending_words)
+                # The terminal-suffix check picks *which side* an orphan
+                # line belongs to, but it has no notion of distance: a
+                # bond/security name ending in a maturity date rather than
+                # a company suffix (e.g. "...GOI (MD 20/06/2027)") reads as
+                # "not yet complete" just as readily as a genuinely
+                # unfinished one does, which can point it at a neighbour
+                # that is implausibly far away. Rather than silently
+                # dropping the words when that happens, fall back to
+                # whichever candidate is actually close enough to be
+                # plausible.
+                if abs(pending_top - anchor_tops[target]) > max_attach:
+                    other = aidx if target == last_anchor_idx else last_anchor_idx
+                    if (
+                        other is not None
+                        and abs(pending_top - anchor_tops[other]) <= max_attach
+                    ):
+                        target = other
+                if (
+                    target is not None
+                    and abs(pending_top - anchor_tops[target]) <= max_attach
+                ):
                     buckets[target]["name"].extend(pending_words)
                 pending_words = []
             buckets[aidx]["name"].extend(row["words"])
@@ -998,25 +1027,29 @@ def _extract_holdings_for_group(
 
 
 _GLUED_RATING_RE = re.compile(
-    r"^(?P<company>.+?\))(?P<rating>Sovereign|SOV|CRISIL\s?[A-Z0-9+\-]+|ICRA\s?[A-Z0-9+\-]+|"
-    r"CARE\s?[A-Z0-9+\-]+|FITCH\s?[A-Z0-9+\-]+)$"
+    r"^(?P<company>.+?(?:\)|Limited|Ltd\.?))"
+    r"(?P<agency>Sovereign|SOV|CRISIL|ICRA|CARE|FITCH)(?P<grade>\s?[A-Z0-9+\-()]*)$"
 )
 
 
 def _split_glued_rating(company, sector):
-    """A closing bracket in a bond's maturity date, e.g. "...14/12/2026)",
-    immediately followed by its rating with no intervening space in the
-    source PDF text itself (a rare source-side kerning artifact, not an
-    extraction error) occasionally comes through pdfplumber as a single
-    fused word. When that leaves the rating/sector empty, split the two
-    back apart rather than surface a company name with a rating baked into
-    the end of it."""
-    if sector:
-        return company, sector
+    """A source-side kerning artifact -- not an extraction error -- can
+    leave a bond/security's rating fused directly onto the end of its name
+    with no space at all, e.g. a closing maturity-date bracket
+    "...14/12/2026)" or the word "Limited" immediately followed by
+    "CRISIL". Depending on exactly where that fused boundary falls, either
+    the whole rating ends up glued to the company name (sector left empty)
+    or just the rating agency's name does, with its grade correctly landing
+    in sector on its own (e.g. company "...LimitedCRISIL", sector "AA+").
+    Either way, the agency name is pulled back out of the company text and
+    recombined with whatever of the rating was already captured properly."""
     m = _GLUED_RATING_RE.match(company)
     if not m:
         return company, sector
-    return m.group("company"), m.group("rating")
+    agency_grade = _clean(f"{m.group('agency')} {m.group('grade')}")
+    if sector and not sector.upper().startswith(m.group("agency").upper()):
+        return m.group("company"), _clean(f"{m.group('agency')} {sector}")
+    return m.group("company"), (sector or agency_grade)
 
 
 def _dedupe_holdings(holdings):
